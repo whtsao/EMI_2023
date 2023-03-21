@@ -1,0 +1,6 @@
+Sun Mar 19 17:20:58 CDT 2023
+Defaulting to user installation because normal site-packages is not writeable
+Requirement already satisfied: pycatenary in /home/whtsao/.local/lib/python3.7/site-packages (0.4.0)
+Defaulting to user installation because normal site-packages is not writeable
+Requirement already satisfied: py2gmsh in /home/whtsao/.local/lib/python3.7/site-packages (4.2.3.1)
+Sun Mar 19 17:21:16 CDT 2023
