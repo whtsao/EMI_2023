@@ -1,0 +1,35 @@
+Tue Mar 14 20:50:13 CDT 2023
+# Wave
+
+# Printing input data here to check
+
+# Height/Depth: 0.050
+# Dimensionless Period T*sqrt(g/d):   5.13
+# Current criterion: Euler,  Dimensionless value: 0.000
+
+# Solution by 8-term Fourier series
+
+
+Height step  1 of  1
+
+Iteration  1: Mean of corrections to free surface:  8.4e-04
+Iteration  2: Mean of corrections to free surface:  1.8e-06
+Iteration  3: Mean of corrections to free surface:  1.3e-09
+Iteration  4: Mean of corrections to free surface:  7.7e-12
+
+# Solution summary:
+
+# Wave
+
+# Solution by 8-term Fourier series
+
+# Height/Depth: 0.050,  10% of the maximum of H/d = 0.492 for this length:
+# Length/Depth:   3.88
+# Dimensionless Period T*sqrt(g/d):   5.13
+# Current criterion: Euler,  Dimensionless value: 0.000
+
+Touch key to continue
+
+
+Finished
+Tue Mar 14 20:51:04 CDT 2023

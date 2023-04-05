@@ -1,0 +1,581 @@
+Autoloading mvapich2/2.3.3/gcc-9.3.0
+
+Loading proteus/1.8.1/gcc-9.3.0-mvapich2-2.3.3
+  Loading requirement: gcc/9.3.0 mvapich2/2.3.3/gcc-9.3.0
+Traceback (most recent call last):
+  File "/project/whtsao/proteus/1.8.1/bin/parun", line 7, in <module>
+Traceback (most recent call last):
+  File "/project/whtsao/proteus/1.8.1/bin/parun", line 7, in <module>
+Traceback (most recent call last):
+  File "/project/whtsao/proteus/1.8.1/bin/parun", line 7, in <module>
+Traceback (most recent call last):
+  File "/project/whtsao/proteus/1.8.1/bin/parun", line 7, in <module>
+Traceback (most recent call last):
+  File "/project/whtsao/proteus/1.8.1/bin/parun", line 7, in <module>
+Traceback (most recent call last):
+  File "/project/whtsao/proteus/1.8.1/bin/parun", line 7, in <module>
+Traceback (most recent call last):
+  File "/project/whtsao/proteus/1.8.1/bin/parun", line 7, in <module>
+Traceback (most recent call last):
+  File "/project/whtsao/proteus/1.8.1/bin/parun", line 7, in <module>
+Traceback (most recent call last):
+  File "/project/whtsao/proteus/1.8.1/bin/parun", line 7, in <module>
+Traceback (most recent call last):
+  File "/project/whtsao/proteus/1.8.1/bin/parun", line 7, in <module>
+Traceback (most recent call last):
+  File "/project/whtsao/proteus/1.8.1/bin/parun", line 7, in <module>
+Traceback (most recent call last):
+  File "/project/whtsao/proteus/1.8.1/bin/parun", line 7, in <module>
+Traceback (most recent call last):
+  File "/project/whtsao/proteus/1.8.1/bin/parun", line 7, in <module>
+Traceback (most recent call last):
+  File "/project/whtsao/proteus/1.8.1/bin/parun", line 7, in <module>
+Traceback (most recent call last):
+  File "/project/whtsao/proteus/1.8.1/bin/parun", line 7, in <module>
+Traceback (most recent call last):
+  File "/project/whtsao/proteus/1.8.1/bin/parun", line 7, in <module>
+Traceback (most recent call last):
+  File "/project/whtsao/proteus/1.8.1/bin/parun", line 7, in <module>
+Traceback (most recent call last):
+  File "/project/whtsao/proteus/1.8.1/bin/parun", line 7, in <module>
+Traceback (most recent call last):
+  File "/project/whtsao/proteus/1.8.1/bin/parun", line 7, in <module>
+Traceback (most recent call last):
+  File "/project/whtsao/proteus/1.8.1/bin/parun", line 7, in <module>
+Traceback (most recent call last):
+  File "/project/whtsao/proteus/1.8.1/bin/parun", line 7, in <module>
+Traceback (most recent call last):
+  File "/project/whtsao/proteus/1.8.1/bin/parun", line 7, in <module>
+Traceback (most recent call last):
+  File "/project/whtsao/proteus/1.8.1/bin/parun", line 7, in <module>
+Traceback (most recent call last):
+  File "/project/whtsao/proteus/1.8.1/bin/parun", line 7, in <module>
+Traceback (most recent call last):
+  File "/project/whtsao/proteus/1.8.1/bin/parun", line 7, in <module>
+Traceback (most recent call last):
+  File "/project/whtsao/proteus/1.8.1/bin/parun", line 7, in <module>
+Traceback (most recent call last):
+  File "/project/whtsao/proteus/1.8.1/bin/parun", line 7, in <module>
+Traceback (most recent call last):
+  File "/project/whtsao/proteus/1.8.1/bin/parun", line 7, in <module>
+Traceback (most recent call last):
+  File "/project/whtsao/proteus/1.8.1/bin/parun", line 7, in <module>
+Traceback (most recent call last):
+  File "/project/whtsao/proteus/1.8.1/bin/parun", line 7, in <module>
+Traceback (most recent call last):
+  File "/project/whtsao/proteus/1.8.1/bin/parun", line 7, in <module>
+Traceback (most recent call last):
+  File "/project/whtsao/proteus/1.8.1/bin/parun", line 7, in <module>
+Traceback (most recent call last):
+  File "/project/whtsao/proteus/1.8.1/bin/parun", line 7, in <module>
+Traceback (most recent call last):
+  File "/project/whtsao/proteus/1.8.1/bin/parun", line 7, in <module>
+Traceback (most recent call last):
+  File "/project/whtsao/proteus/1.8.1/bin/parun", line 7, in <module>
+Traceback (most recent call last):
+  File "/project/whtsao/proteus/1.8.1/bin/parun", line 7, in <module>
+Traceback (most recent call last):
+  File "/project/whtsao/proteus/1.8.1/bin/parun", line 7, in <module>
+Traceback (most recent call last):
+  File "/project/whtsao/proteus/1.8.1/bin/parun", line 7, in <module>
+Traceback (most recent call last):
+  File "/project/whtsao/proteus/1.8.1/bin/parun", line 7, in <module>
+Traceback (most recent call last):
+  File "/project/whtsao/proteus/1.8.1/bin/parun", line 7, in <module>
+Traceback (most recent call last):
+  File "/project/whtsao/proteus/1.8.1/bin/parun", line 7, in <module>
+Traceback (most recent call last):
+  File "/project/whtsao/proteus/1.8.1/bin/parun", line 7, in <module>
+Traceback (most recent call last):
+  File "/project/whtsao/proteus/1.8.1/bin/parun", line 7, in <module>
+    exec(compile(f.read(), __file__, 'exec'))
+  File "/ddnA/project/cekees/whtsao/proteus/scripts/parun", line 372, in <module>
+Traceback (most recent call last):
+  File "/project/whtsao/proteus/1.8.1/bin/parun", line 7, in <module>
+Traceback (most recent call last):
+  File "/project/whtsao/proteus/1.8.1/bin/parun", line 7, in <module>
+    exec(compile(f.read(), __file__, 'exec'))
+  File "/ddnA/project/cekees/whtsao/proteus/scripts/parun", line 372, in <module>
+Traceback (most recent call last):
+  File "/project/whtsao/proteus/1.8.1/bin/parun", line 7, in <module>
+    exec(compile(f.read(), __file__, 'exec'))
+  File "/ddnA/project/cekees/whtsao/proteus/scripts/parun", line 372, in <module>
+    case = __import__(name)
+  File "/ddnA/work/whtsao/emi2023_with_tld.337830/./pmtld.py", line 157, in <module>
+Traceback (most recent call last):
+  File "/project/whtsao/proteus/1.8.1/bin/parun", line 7, in <module>
+    case = __import__(name)
+  File "/ddnA/work/whtsao/emi2023_with_tld.337830/./pmtld.py", line 157, in <module>
+    case = __import__(name)
+  File "/ddnA/work/whtsao/emi2023_with_tld.337830/./pmtld.py", line 157, in <module>
+    exec(compile(f.read(), __file__, 'exec'))
+  File "/ddnA/project/cekees/whtsao/proteus/scripts/parun", line 372, in <module>
+    exec(compile(f.read(), __file__, 'exec'))
+  File "/ddnA/project/cekees/whtsao/proteus/scripts/parun", line 372, in <module>
+    pmtld = st.CustomShape(
+  File "/ddnA/project/cekees/whtsao/proteus/proteus/SpatialTools.py", line 1066, in __init__
+    exec(compile(f.read(), __file__, 'exec'))
+  File "/ddnA/project/cekees/whtsao/proteus/scripts/parun", line 372, in <module>
+    exec(compile(f.read(), __file__, 'exec'))
+  File "/ddnA/project/cekees/whtsao/proteus/scripts/parun", line 372, in <module>
+    exec(compile(f.read(), __file__, 'exec'))
+  File "/ddnA/project/cekees/whtsao/proteus/scripts/parun", line 372, in <module>
+    exec(compile(f.read(), __file__, 'exec'))
+  File "/ddnA/project/cekees/whtsao/proteus/scripts/parun", line 372, in <module>
+    exec(compile(f.read(), __file__, 'exec'))
+  File "/ddnA/project/cekees/whtsao/proteus/scripts/parun", line 372, in <module>
+    exec(compile(f.read(), __file__, 'exec'))
+  File "/ddnA/project/cekees/whtsao/proteus/scripts/parun", line 372, in <module>
+    pmtld = st.CustomShape(
+  File "/ddnA/project/cekees/whtsao/proteus/proteus/SpatialTools.py", line 1066, in __init__
+    exec(compile(f.read(), __file__, 'exec'))
+  File "/ddnA/project/cekees/whtsao/proteus/scripts/parun", line 372, in <module>
+    exec(compile(f.read(), __file__, 'exec'))
+  File "/ddnA/project/cekees/whtsao/proteus/scripts/parun", line 372, in <module>
+    exec(compile(f.read(), __file__, 'exec'))
+  File "/ddnA/project/cekees/whtsao/proteus/scripts/parun", line 372, in <module>
+    exec(compile(f.read(), __file__, 'exec'))
+  File "/ddnA/project/cekees/whtsao/proteus/scripts/parun", line 372, in <module>
+    exec(compile(f.read(), __file__, 'exec'))
+  File "/ddnA/project/cekees/whtsao/proteus/scripts/parun", line 372, in <module>
+    exec(compile(f.read(), __file__, 'exec'))
+  File "/ddnA/project/cekees/whtsao/proteus/scripts/parun", line 372, in <module>
+    case = __import__(name)
+  File "/ddnA/work/whtsao/emi2023_with_tld.337830/./pmtld.py", line 157, in <module>
+    exec(compile(f.read(), __file__, 'exec'))
+  File "/ddnA/project/cekees/whtsao/proteus/scripts/parun", line 372, in <module>
+    case = __import__(name)
+  File "/ddnA/work/whtsao/emi2023_with_tld.337830/./pmtld.py", line 157, in <module>
+    exec(compile(f.read(), __file__, 'exec'))
+  File "/ddnA/project/cekees/whtsao/proteus/scripts/parun", line 372, in <module>
+    exec(compile(f.read(), __file__, 'exec'))
+  File "/ddnA/project/cekees/whtsao/proteus/scripts/parun", line 372, in <module>
+    exec(compile(f.read(), __file__, 'exec'))
+  File "/ddnA/project/cekees/whtsao/proteus/scripts/parun", line 372, in <module>
+    exec(compile(f.read(), __file__, 'exec'))
+  File "/ddnA/project/cekees/whtsao/proteus/scripts/parun", line 372, in <module>
+    exec(compile(f.read(), __file__, 'exec'))
+  File "/ddnA/project/cekees/whtsao/proteus/scripts/parun", line 372, in <module>
+    exec(compile(f.read(), __file__, 'exec'))
+  File "/ddnA/project/cekees/whtsao/proteus/scripts/parun", line 372, in <module>
+    exec(compile(f.read(), __file__, 'exec'))
+  File "/ddnA/project/cekees/whtsao/proteus/scripts/parun", line 372, in <module>
+    exec(compile(f.read(), __file__, 'exec'))
+  File "/ddnA/project/cekees/whtsao/proteus/scripts/parun", line 372, in <module>
+    case = __import__(name)
+  File "/ddnA/work/whtsao/emi2023_with_tld.337830/./pmtld.py", line 157, in <module>
+    exec(compile(f.read(), __file__, 'exec'))
+  File "/ddnA/project/cekees/whtsao/proteus/scripts/parun", line 372, in <module>
+    case = __import__(name)
+  File "/ddnA/work/whtsao/emi2023_with_tld.337830/./pmtld.py", line 157, in <module>
+    case = __import__(name)
+  File "/ddnA/work/whtsao/emi2023_with_tld.337830/./pmtld.py", line 157, in <module>
+    case = __import__(name)
+  File "/ddnA/work/whtsao/emi2023_with_tld.337830/./pmtld.py", line 157, in <module>
+    exec(compile(f.read(), __file__, 'exec'))
+  File "/ddnA/project/cekees/whtsao/proteus/scripts/parun", line 372, in <module>
+    case = __import__(name)
+  File "/ddnA/work/whtsao/emi2023_with_tld.337830/./pmtld.py", line 157, in <module>
+    case = __import__(name)
+  File "/ddnA/work/whtsao/emi2023_with_tld.337830/./pmtld.py", line 157, in <module>
+    case = __import__(name)
+  File "/ddnA/work/whtsao/emi2023_with_tld.337830/./pmtld.py", line 157, in <module>
+    pmtld = st.CustomShape(
+  File "/ddnA/project/cekees/whtsao/proteus/proteus/SpatialTools.py", line 1066, in __init__
+    case = __import__(name)
+  File "/ddnA/work/whtsao/emi2023_with_tld.337830/./pmtld.py", line 157, in <module>
+    exec(compile(f.read(), __file__, 'exec'))
+  File "/ddnA/project/cekees/whtsao/proteus/scripts/parun", line 372, in <module>
+    case = __import__(name)
+  File "/ddnA/work/whtsao/emi2023_with_tld.337830/./pmtld.py", line 157, in <module>
+    exec(compile(f.read(), __file__, 'exec'))
+  File "/ddnA/project/cekees/whtsao/proteus/scripts/parun", line 372, in <module>
+    exec(compile(f.read(), __file__, 'exec'))
+  File "/ddnA/project/cekees/whtsao/proteus/scripts/parun", line 372, in <module>
+    case = __import__(name)
+  File "/ddnA/work/whtsao/emi2023_with_tld.337830/./pmtld.py", line 157, in <module>
+    case = __import__(name)
+  File "/ddnA/work/whtsao/emi2023_with_tld.337830/./pmtld.py", line 157, in <module>
+    exec(compile(f.read(), __file__, 'exec'))
+  File "/ddnA/project/cekees/whtsao/proteus/scripts/parun", line 372, in <module>
+    exec(compile(f.read(), __file__, 'exec'))
+  File "/ddnA/project/cekees/whtsao/proteus/scripts/parun", line 372, in <module>
+    exec(compile(f.read(), __file__, 'exec'))
+  File "/ddnA/project/cekees/whtsao/proteus/scripts/parun", line 372, in <module>
+    case = __import__(name)
+  File "/ddnA/work/whtsao/emi2023_with_tld.337830/./pmtld.py", line 157, in <module>
+    case = __import__(name)
+  File "/ddnA/work/whtsao/emi2023_with_tld.337830/./pmtld.py", line 157, in <module>
+    exec(compile(f.read(), __file__, 'exec'))
+  File "/ddnA/project/cekees/whtsao/proteus/scripts/parun", line 372, in <module>
+    exec(compile(f.read(), __file__, 'exec'))
+  File "/ddnA/project/cekees/whtsao/proteus/scripts/parun", line 372, in <module>
+    exec(compile(f.read(), __file__, 'exec'))
+  File "/ddnA/project/cekees/whtsao/proteus/scripts/parun", line 372, in <module>
+    case = __import__(name)
+  File "/ddnA/work/whtsao/emi2023_with_tld.337830/./pmtld.py", line 157, in <module>
+    exec(compile(f.read(), __file__, 'exec'))
+  File "/ddnA/project/cekees/whtsao/proteus/scripts/parun", line 372, in <module>
+    case = __import__(name)
+  File "/ddnA/work/whtsao/emi2023_with_tld.337830/./pmtld.py", line 157, in <module>
+    exec(compile(f.read(), __file__, 'exec'))
+  File "/ddnA/project/cekees/whtsao/proteus/scripts/parun", line 372, in <module>
+    case = __import__(name)
+  File "/ddnA/work/whtsao/emi2023_with_tld.337830/./pmtld.py", line 157, in <module>
+    exec(compile(f.read(), __file__, 'exec'))
+  File "/ddnA/project/cekees/whtsao/proteus/scripts/parun", line 372, in <module>
+    exec(compile(f.read(), __file__, 'exec'))
+  File "/ddnA/project/cekees/whtsao/proteus/scripts/parun", line 372, in <module>
+    case = __import__(name)
+  File "/ddnA/work/whtsao/emi2023_with_tld.337830/./pmtld.py", line 157, in <module>
+    exec(compile(f.read(), __file__, 'exec'))
+  File "/ddnA/project/cekees/whtsao/proteus/scripts/parun", line 372, in <module>
+    case = __import__(name)
+  File "/ddnA/work/whtsao/emi2023_with_tld.337830/./pmtld.py", line 157, in <module>
+    case = __import__(name)
+  File "/ddnA/work/whtsao/emi2023_with_tld.337830/./pmtld.py", line 157, in <module>
+    exec(compile(f.read(), __file__, 'exec'))
+  File "/ddnA/project/cekees/whtsao/proteus/scripts/parun", line 372, in <module>
+    case = __import__(name)
+  File "/ddnA/work/whtsao/emi2023_with_tld.337830/./pmtld.py", line 157, in <module>
+    exec(compile(f.read(), __file__, 'exec'))
+  File "/ddnA/project/cekees/whtsao/proteus/scripts/parun", line 372, in <module>
+    case = __import__(name)
+  File "/ddnA/work/whtsao/emi2023_with_tld.337830/./pmtld.py", line 157, in <module>
+    exec(compile(f.read(), __file__, 'exec'))
+  File "/ddnA/project/cekees/whtsao/proteus/scripts/parun", line 372, in <module>
+    case = __import__(name)
+  File "/ddnA/work/whtsao/emi2023_with_tld.337830/./pmtld.py", line 157, in <module>
+    case = __import__(name)
+  File "/ddnA/work/whtsao/emi2023_with_tld.337830/./pmtld.py", line 157, in <module>
+    case = __import__(name)
+  File "/ddnA/work/whtsao/emi2023_with_tld.337830/./pmtld.py", line 157, in <module>
+    exec(compile(f.read(), __file__, 'exec'))
+  File "/ddnA/project/cekees/whtsao/proteus/scripts/parun", line 372, in <module>
+    case = __import__(name)
+  File "/ddnA/work/whtsao/emi2023_with_tld.337830/./pmtld.py", line 157, in <module>
+    case = __import__(name)
+  File "/ddnA/work/whtsao/emi2023_with_tld.337830/./pmtld.py", line 157, in <module>
+    case = __import__(name)
+  File "/ddnA/work/whtsao/emi2023_with_tld.337830/./pmtld.py", line 157, in <module>
+    case = __import__(name)
+  File "/ddnA/work/whtsao/emi2023_with_tld.337830/./pmtld.py", line 157, in <module>
+    case = __import__(name)
+  File "/ddnA/work/whtsao/emi2023_with_tld.337830/./pmtld.py", line 157, in <module>
+    case = __import__(name)
+  File "/ddnA/work/whtsao/emi2023_with_tld.337830/./pmtld.py", line 157, in <module>
+    case = __import__(name)
+  File "/ddnA/work/whtsao/emi2023_with_tld.337830/./pmtld.py", line 157, in <module>
+    case = __import__(name)
+  File "/ddnA/work/whtsao/emi2023_with_tld.337830/./pmtld.py", line 157, in <module>
+    case = __import__(name)
+  File "/ddnA/work/whtsao/emi2023_with_tld.337830/./pmtld.py", line 157, in <module>
+    case = __import__(name)
+  File "/ddnA/work/whtsao/emi2023_with_tld.337830/./pmtld.py", line 157, in <module>
+    exec(compile(f.read(), __file__, 'exec'))
+  File "/ddnA/project/cekees/whtsao/proteus/scripts/parun", line 372, in <module>
+    pmtld = st.CustomShape(
+  File "/ddnA/project/cekees/whtsao/proteus/proteus/SpatialTools.py", line 1066, in __init__
+    case = __import__(name)
+  File "/ddnA/work/whtsao/emi2023_with_tld.337830/./pmtld.py", line 157, in <module>
+    pmtld = st.CustomShape(
+  File "/ddnA/project/cekees/whtsao/proteus/proteus/SpatialTools.py", line 1066, in __init__
+    pmtld = st.CustomShape(
+  File "/ddnA/project/cekees/whtsao/proteus/proteus/SpatialTools.py", line 1066, in __init__
+    case = __import__(name)
+  File "/ddnA/work/whtsao/emi2023_with_tld.337830/./pmtld.py", line 157, in <module>
+    pmtld = st.CustomShape(
+  File "/ddnA/project/cekees/whtsao/proteus/proteus/SpatialTools.py", line 1066, in __init__
+    case = __import__(name)
+  File "/ddnA/work/whtsao/emi2023_with_tld.337830/./pmtld.py", line 157, in <module>
+    pmtld = st.CustomShape(
+  File "/ddnA/project/cekees/whtsao/proteus/proteus/SpatialTools.py", line 1066, in __init__
+    pmtld = st.CustomShape(
+  File "/ddnA/project/cekees/whtsao/proteus/proteus/SpatialTools.py", line 1066, in __init__
+    pmtld = st.CustomShape(
+  File "/ddnA/project/cekees/whtsao/proteus/proteus/SpatialTools.py", line 1066, in __init__
+    case = __import__(name)
+  File "/ddnA/work/whtsao/emi2023_with_tld.337830/./pmtld.py", line 157, in <module>
+    pmtld = st.CustomShape(
+  File "/ddnA/project/cekees/whtsao/proteus/proteus/SpatialTools.py", line 1066, in __init__
+    case = __import__(name)
+  File "/ddnA/work/whtsao/emi2023_with_tld.337830/./pmtld.py", line 157, in <module>
+    pmtld = st.CustomShape(
+  File "/ddnA/project/cekees/whtsao/proteus/proteus/SpatialTools.py", line 1066, in __init__
+    pmtld = st.CustomShape(
+  File "/ddnA/project/cekees/whtsao/proteus/proteus/SpatialTools.py", line 1066, in __init__
+    pmtld = st.CustomShape(
+  File "/ddnA/project/cekees/whtsao/proteus/proteus/SpatialTools.py", line 1066, in __init__
+    case = __import__(name)
+  File "/ddnA/work/whtsao/emi2023_with_tld.337830/./pmtld.py", line 157, in <module>
+    pmtld = st.CustomShape(
+  File "/ddnA/project/cekees/whtsao/proteus/proteus/SpatialTools.py", line 1066, in __init__
+    pmtld = st.CustomShape(
+  File "/ddnA/project/cekees/whtsao/proteus/proteus/SpatialTools.py", line 1066, in __init__
+    pmtld = st.CustomShape(
+  File "/ddnA/project/cekees/whtsao/proteus/proteus/SpatialTools.py", line 1066, in __init__
+    pmtld = st.CustomShape(
+  File "/ddnA/project/cekees/whtsao/proteus/proteus/SpatialTools.py", line 1066, in __init__
+    pmtld = st.CustomShape(
+  File "/ddnA/project/cekees/whtsao/proteus/proteus/SpatialTools.py", line 1066, in __init__
+    pmtld = st.CustomShape(
+  File "/ddnA/project/cekees/whtsao/proteus/proteus/SpatialTools.py", line 1066, in __init__
+    pmtld = st.CustomShape(
+  File "/ddnA/project/cekees/whtsao/proteus/proteus/SpatialTools.py", line 1066, in __init__
+    case = __import__(name)
+  File "/ddnA/work/whtsao/emi2023_with_tld.337830/./pmtld.py", line 157, in <module>
+    pmtld = st.CustomShape(
+  File "/ddnA/project/cekees/whtsao/proteus/proteus/SpatialTools.py", line 1066, in __init__
+    pmtld = st.CustomShape(
+  File "/ddnA/project/cekees/whtsao/proteus/proteus/SpatialTools.py", line 1066, in __init__
+    pmtld = st.CustomShape(
+  File "/ddnA/project/cekees/whtsao/proteus/proteus/SpatialTools.py", line 1066, in __init__
+    pmtld = st.CustomShape(
+  File "/ddnA/project/cekees/whtsao/proteus/proteus/SpatialTools.py", line 1066, in __init__
+    pmtld = st.CustomShape(
+  File "/ddnA/project/cekees/whtsao/proteus/proteus/SpatialTools.py", line 1066, in __init__
+    pmtld = st.CustomShape(
+  File "/ddnA/project/cekees/whtsao/proteus/proteus/SpatialTools.py", line 1066, in __init__
+    pmtld = st.CustomShape(
+  File "/ddnA/project/cekees/whtsao/proteus/proteus/SpatialTools.py", line 1066, in __init__
+    pmtld = st.CustomShape(
+  File "/ddnA/project/cekees/whtsao/proteus/proteus/SpatialTools.py", line 1066, in __init__
+    pmtld = st.CustomShape(
+  File "/ddnA/project/cekees/whtsao/proteus/proteus/SpatialTools.py", line 1066, in __init__
+    pmtld = st.CustomShape(
+  File "/ddnA/project/cekees/whtsao/proteus/proteus/SpatialTools.py", line 1066, in __init__
+    pmtld = st.CustomShape(
+  File "/ddnA/project/cekees/whtsao/proteus/proteus/SpatialTools.py", line 1066, in __init__
+    pmtld = st.CustomShape(
+  File "/ddnA/project/cekees/whtsao/proteus/proteus/SpatialTools.py", line 1066, in __init__
+    pmtld = st.CustomShape(
+  File "/ddnA/project/cekees/whtsao/proteus/proteus/SpatialTools.py", line 1066, in __init__
+    pmtld = st.CustomShape(
+  File "/ddnA/project/cekees/whtsao/proteus/proteus/SpatialTools.py", line 1066, in __init__
+    pmtld = st.CustomShape(
+  File "/ddnA/project/cekees/whtsao/proteus/proteus/SpatialTools.py", line 1066, in __init__
+    pmtld = st.CustomShape(
+  File "/ddnA/project/cekees/whtsao/proteus/proteus/SpatialTools.py", line 1066, in __init__
+    pmtld = st.CustomShape(
+  File "/ddnA/project/cekees/whtsao/proteus/proteus/SpatialTools.py", line 1066, in __init__
+    pmtld = st.CustomShape(
+  File "/ddnA/project/cekees/whtsao/proteus/proteus/SpatialTools.py", line 1066, in __init__
+    pmtld = st.CustomShape(
+  File "/ddnA/project/cekees/whtsao/proteus/proteus/SpatialTools.py", line 1066, in __init__
+    pmtld = st.CustomShape(
+  File "/ddnA/project/cekees/whtsao/proteus/proteus/SpatialTools.py", line 1066, in __init__
+    pmtld = st.CustomShape(
+  File "/ddnA/project/cekees/whtsao/proteus/proteus/SpatialTools.py", line 1066, in __init__
+    case = __import__(name)
+  File "/ddnA/work/whtsao/emi2023_with_tld.337830/./pmtld.py", line 157, in <module>
+    pmtld = st.CustomShape(
+  File "/ddnA/project/cekees/whtsao/proteus/proteus/SpatialTools.py", line 1066, in __init__
+    pmtld = st.CustomShape(
+  File "/ddnA/project/cekees/whtsao/proteus/proteus/SpatialTools.py", line 1066, in __init__
+    pmtld = st.CustomShape(
+  File "/ddnA/project/cekees/whtsao/proteus/proteus/SpatialTools.py", line 1066, in __init__
+    pmtld = st.CustomShape(
+  File "/ddnA/project/cekees/whtsao/proteus/proteus/SpatialTools.py", line 1066, in __init__
+    pmtld = st.CustomShape(
+  File "/ddnA/project/cekees/whtsao/proteus/proteus/SpatialTools.py", line 1066, in __init__
+Traceback (most recent call last):
+  File "/project/whtsao/proteus/1.8.1/bin/parun", line 7, in <module>
+    exec(compile(f.read(), __file__, 'exec'))
+  File "/ddnA/project/cekees/whtsao/proteus/scripts/parun", line 372, in <module>
+    case = __import__(name)
+  File "/ddnA/work/whtsao/emi2023_with_tld.337830/./pmtld.py", line 157, in <module>
+    pmtld = st.CustomShape(
+  File "/ddnA/project/cekees/whtsao/proteus/proteus/SpatialTools.py", line 1066, in __init__
+    self._checkFlags(regionFlags)
+  File "/ddnA/project/cekees/whtsao/proteus/proteus/SpatialTools.py", line 120, in _checkFlags
+    self._checkFlags(regionFlags)
+  File "/ddnA/project/cekees/whtsao/proteus/proteus/SpatialTools.py", line 120, in _checkFlags
+    self._checkFlags(regionFlags)
+  File "/ddnA/project/cekees/whtsao/proteus/proteus/SpatialTools.py", line 120, in _checkFlags
+    self._checkFlags(regionFlags)
+  File "/ddnA/project/cekees/whtsao/proteus/proteus/SpatialTools.py", line 120, in _checkFlags
+    self._checkFlags(regionFlags)
+  File "/ddnA/project/cekees/whtsao/proteus/proteus/SpatialTools.py", line 120, in _checkFlags
+    self._checkFlags(regionFlags)
+  File "/ddnA/project/cekees/whtsao/proteus/proteus/SpatialTools.py", line 120, in _checkFlags
+    assert checkFlag == 1, 'Minimum boundary/region tag/flag must be 1'
+AssertionError: Minimum boundary/region tag/flag must be 1
+    self._checkFlags(regionFlags)
+  File "/ddnA/project/cekees/whtsao/proteus/proteus/SpatialTools.py", line 120, in _checkFlags
+    self._checkFlags(regionFlags)
+  File "/ddnA/project/cekees/whtsao/proteus/proteus/SpatialTools.py", line 120, in _checkFlags
+    self._checkFlags(regionFlags)
+  File "/ddnA/project/cekees/whtsao/proteus/proteus/SpatialTools.py", line 120, in _checkFlags
+    self._checkFlags(regionFlags)
+  File "/ddnA/project/cekees/whtsao/proteus/proteus/SpatialTools.py", line 120, in _checkFlags
+    assert checkFlag == 1, 'Minimum boundary/region tag/flag must be 1'
+AssertionError: Minimum boundary/region tag/flag must be 1
+    assert checkFlag == 1, 'Minimum boundary/region tag/flag must be 1'
+AssertionError: Minimum boundary/region tag/flag must be 1
+    self._checkFlags(regionFlags)
+  File "/ddnA/project/cekees/whtsao/proteus/proteus/SpatialTools.py", line 120, in _checkFlags
+    assert checkFlag == 1, 'Minimum boundary/region tag/flag must be 1'
+AssertionError: Minimum boundary/region tag/flag must be 1
+    self._checkFlags(regionFlags)
+  File "/ddnA/project/cekees/whtsao/proteus/proteus/SpatialTools.py", line 120, in _checkFlags
+    assert checkFlag == 1, 'Minimum boundary/region tag/flag must be 1'
+AssertionError: Minimum boundary/region tag/flag must be 1
+    self._checkFlags(regionFlags)
+  File "/ddnA/project/cekees/whtsao/proteus/proteus/SpatialTools.py", line 120, in _checkFlags
+    assert checkFlag == 1, 'Minimum boundary/region tag/flag must be 1'
+AssertionError: Minimum boundary/region tag/flag must be 1
+    assert checkFlag == 1, 'Minimum boundary/region tag/flag must be 1'
+AssertionError: Minimum boundary/region tag/flag must be 1
+    self._checkFlags(regionFlags)
+  File "/ddnA/project/cekees/whtsao/proteus/proteus/SpatialTools.py", line 120, in _checkFlags
+    assert checkFlag == 1, 'Minimum boundary/region tag/flag must be 1'
+AssertionError: Minimum boundary/region tag/flag must be 1
+    self._checkFlags(regionFlags)
+  File "/ddnA/project/cekees/whtsao/proteus/proteus/SpatialTools.py", line 120, in _checkFlags
+    assert checkFlag == 1, 'Minimum boundary/region tag/flag must be 1'
+AssertionError: Minimum boundary/region tag/flag must be 1
+    assert checkFlag == 1, 'Minimum boundary/region tag/flag must be 1'
+AssertionError: Minimum boundary/region tag/flag must be 1
+    self._checkFlags(regionFlags)
+  File "/ddnA/project/cekees/whtsao/proteus/proteus/SpatialTools.py", line 120, in _checkFlags
+    assert checkFlag == 1, 'Minimum boundary/region tag/flag must be 1'
+AssertionError: Minimum boundary/region tag/flag must be 1
+    assert checkFlag == 1, 'Minimum boundary/region tag/flag must be 1'
+AssertionError: Minimum boundary/region tag/flag must be 1
+    assert checkFlag == 1, 'Minimum boundary/region tag/flag must be 1'
+AssertionError: Minimum boundary/region tag/flag must be 1
+    assert checkFlag == 1, 'Minimum boundary/region tag/flag must be 1'
+AssertionError: Minimum boundary/region tag/flag must be 1
+    self._checkFlags(regionFlags)
+  File "/ddnA/project/cekees/whtsao/proteus/proteus/SpatialTools.py", line 120, in _checkFlags
+    assert checkFlag == 1, 'Minimum boundary/region tag/flag must be 1'
+AssertionError: Minimum boundary/region tag/flag must be 1
+    assert checkFlag == 1, 'Minimum boundary/region tag/flag must be 1'
+AssertionError: Minimum boundary/region tag/flag must be 1
+    assert checkFlag == 1, 'Minimum boundary/region tag/flag must be 1'
+AssertionError: Minimum boundary/region tag/flag must be 1
+    self._checkFlags(regionFlags)
+  File "/ddnA/project/cekees/whtsao/proteus/proteus/SpatialTools.py", line 120, in _checkFlags
+    self._checkFlags(regionFlags)
+  File "/ddnA/project/cekees/whtsao/proteus/proteus/SpatialTools.py", line 120, in _checkFlags
+    self._checkFlags(regionFlags)
+  File "/ddnA/project/cekees/whtsao/proteus/proteus/SpatialTools.py", line 120, in _checkFlags
+    assert checkFlag == 1, 'Minimum boundary/region tag/flag must be 1'
+    self._checkFlags(regionFlags)
+  File "/ddnA/project/cekees/whtsao/proteus/proteus/SpatialTools.py", line 120, in _checkFlags
+AssertionError: Minimum boundary/region tag/flag must be 1
+    self._checkFlags(regionFlags)
+  File "/ddnA/project/cekees/whtsao/proteus/proteus/SpatialTools.py", line 120, in _checkFlags
+    assert checkFlag == 1, 'Minimum boundary/region tag/flag must be 1'
+AssertionError: Minimum boundary/region tag/flag must be 1
+    assert checkFlag == 1, 'Minimum boundary/region tag/flag must be 1'
+AssertionError: Minimum boundary/region tag/flag must be 1
+    self._checkFlags(regionFlags)
+  File "/ddnA/project/cekees/whtsao/proteus/proteus/SpatialTools.py", line 120, in _checkFlags
+    self._checkFlags(regionFlags)
+  File "/ddnA/project/cekees/whtsao/proteus/proteus/SpatialTools.py", line 120, in _checkFlags
+    assert checkFlag == 1, 'Minimum boundary/region tag/flag must be 1'
+AssertionError: Minimum boundary/region tag/flag must be 1
+    assert checkFlag == 1, 'Minimum boundary/region tag/flag must be 1'
+    assert checkFlag == 1, 'Minimum boundary/region tag/flag must be 1'
+AssertionError: Minimum boundary/region tag/flag must be 1
+AssertionError: Minimum boundary/region tag/flag must be 1
+    assert checkFlag == 1, 'Minimum boundary/region tag/flag must be 1'
+AssertionError: Minimum boundary/region tag/flag must be 1
+    self._checkFlags(regionFlags)
+  File "/ddnA/project/cekees/whtsao/proteus/proteus/SpatialTools.py", line 120, in _checkFlags
+    self._checkFlags(regionFlags)
+  File "/ddnA/project/cekees/whtsao/proteus/proteus/SpatialTools.py", line 120, in _checkFlags
+    self._checkFlags(regionFlags)
+  File "/ddnA/project/cekees/whtsao/proteus/proteus/SpatialTools.py", line 120, in _checkFlags
+    assert checkFlag == 1, 'Minimum boundary/region tag/flag must be 1'
+AssertionError: Minimum boundary/region tag/flag must be 1
+    self._checkFlags(regionFlags)
+  File "/ddnA/project/cekees/whtsao/proteus/proteus/SpatialTools.py", line 120, in _checkFlags
+    self._checkFlags(regionFlags)
+  File "/ddnA/project/cekees/whtsao/proteus/proteus/SpatialTools.py", line 120, in _checkFlags
+    self._checkFlags(regionFlags)
+  File "/ddnA/project/cekees/whtsao/proteus/proteus/SpatialTools.py", line 120, in _checkFlags
+    assert checkFlag == 1, 'Minimum boundary/region tag/flag must be 1'
+AssertionError: Minimum boundary/region tag/flag must be 1
+    self._checkFlags(regionFlags)
+  File "/ddnA/project/cekees/whtsao/proteus/proteus/SpatialTools.py", line 120, in _checkFlags
+    self._checkFlags(regionFlags)
+  File "/ddnA/project/cekees/whtsao/proteus/proteus/SpatialTools.py", line 120, in _checkFlags
+    self._checkFlags(regionFlags)
+  File "/ddnA/project/cekees/whtsao/proteus/proteus/SpatialTools.py", line 120, in _checkFlags
+    self._checkFlags(regionFlags)
+  File "/ddnA/project/cekees/whtsao/proteus/proteus/SpatialTools.py", line 120, in _checkFlags
+    self._checkFlags(regionFlags)
+  File "/ddnA/project/cekees/whtsao/proteus/proteus/SpatialTools.py", line 120, in _checkFlags
+    self._checkFlags(regionFlags)
+  File "/ddnA/project/cekees/whtsao/proteus/proteus/SpatialTools.py", line 120, in _checkFlags
+    self._checkFlags(regionFlags)
+  File "/ddnA/project/cekees/whtsao/proteus/proteus/SpatialTools.py", line 120, in _checkFlags
+    assert checkFlag == 1, 'Minimum boundary/region tag/flag must be 1'
+AssertionError: Minimum boundary/region tag/flag must be 1
+    assert checkFlag == 1, 'Minimum boundary/region tag/flag must be 1'
+AssertionError: Minimum boundary/region tag/flag must be 1
+    self._checkFlags(regionFlags)
+  File "/ddnA/project/cekees/whtsao/proteus/proteus/SpatialTools.py", line 120, in _checkFlags
+    self._checkFlags(regionFlags)
+  File "/ddnA/project/cekees/whtsao/proteus/proteus/SpatialTools.py", line 120, in _checkFlags
+    assert checkFlag == 1, 'Minimum boundary/region tag/flag must be 1'
+AssertionError: Minimum boundary/region tag/flag must be 1
+    assert checkFlag == 1, 'Minimum boundary/region tag/flag must be 1'
+AssertionError: Minimum boundary/region tag/flag must be 1
+    self._checkFlags(regionFlags)
+  File "/ddnA/project/cekees/whtsao/proteus/proteus/SpatialTools.py", line 120, in _checkFlags
+    assert checkFlag == 1, 'Minimum boundary/region tag/flag must be 1'
+AssertionError: Minimum boundary/region tag/flag must be 1
+    assert checkFlag == 1, 'Minimum boundary/region tag/flag must be 1'
+AssertionError: Minimum boundary/region tag/flag must be 1
+    assert checkFlag == 1, 'Minimum boundary/region tag/flag must be 1'
+AssertionError: Minimum boundary/region tag/flag must be 1
+    assert checkFlag == 1, 'Minimum boundary/region tag/flag must be 1'
+AssertionError: Minimum boundary/region tag/flag must be 1
+    assert checkFlag == 1, 'Minimum boundary/region tag/flag must be 1'
+AssertionError: Minimum boundary/region tag/flag must be 1
+    assert checkFlag == 1, 'Minimum boundary/region tag/flag must be 1'
+AssertionError: Minimum boundary/region tag/flag must be 1
+    assert checkFlag == 1, 'Minimum boundary/region tag/flag must be 1'
+AssertionError: Minimum boundary/region tag/flag must be 1
+    assert checkFlag == 1, 'Minimum boundary/region tag/flag must be 1'
+AssertionError: Minimum boundary/region tag/flag must be 1
+    assert checkFlag == 1, 'Minimum boundary/region tag/flag must be 1'
+AssertionError: Minimum boundary/region tag/flag must be 1
+    assert checkFlag == 1, 'Minimum boundary/region tag/flag must be 1'
+AssertionError: Minimum boundary/region tag/flag must be 1
+    self._checkFlags(regionFlags)
+  File "/ddnA/project/cekees/whtsao/proteus/proteus/SpatialTools.py", line 120, in _checkFlags
+    assert checkFlag == 1, 'Minimum boundary/region tag/flag must be 1'
+AssertionError: Minimum boundary/region tag/flag must be 1
+    self._checkFlags(regionFlags)
+  File "/ddnA/project/cekees/whtsao/proteus/proteus/SpatialTools.py", line 120, in _checkFlags
+    self._checkFlags(regionFlags)
+  File "/ddnA/project/cekees/whtsao/proteus/proteus/SpatialTools.py", line 120, in _checkFlags
+    self._checkFlags(regionFlags)
+  File "/ddnA/project/cekees/whtsao/proteus/proteus/SpatialTools.py", line 120, in _checkFlags
+    self._checkFlags(regionFlags)
+  File "/ddnA/project/cekees/whtsao/proteus/proteus/SpatialTools.py", line 120, in _checkFlags
+    self._checkFlags(regionFlags)
+  File "/ddnA/project/cekees/whtsao/proteus/proteus/SpatialTools.py", line 120, in _checkFlags
+    self._checkFlags(regionFlags)
+  File "/ddnA/project/cekees/whtsao/proteus/proteus/SpatialTools.py", line 120, in _checkFlags
+    assert checkFlag == 1, 'Minimum boundary/region tag/flag must be 1'
+AssertionError: Minimum boundary/region tag/flag must be 1
+    assert checkFlag == 1, 'Minimum boundary/region tag/flag must be 1'
+AssertionError: Minimum boundary/region tag/flag must be 1
+    assert checkFlag == 1, 'Minimum boundary/region tag/flag must be 1'
+AssertionError: Minimum boundary/region tag/flag must be 1
+    assert checkFlag == 1, 'Minimum boundary/region tag/flag must be 1'
+AssertionError: Minimum boundary/region tag/flag must be 1
+    assert checkFlag == 1, 'Minimum boundary/region tag/flag must be 1'
+AssertionError: Minimum boundary/region tag/flag must be 1
+    assert checkFlag == 1, 'Minimum boundary/region tag/flag must be 1'
+AssertionError: Minimum boundary/region tag/flag must be 1
+    self._checkFlags(regionFlags)
+  File "/ddnA/project/cekees/whtsao/proteus/proteus/SpatialTools.py", line 120, in _checkFlags
+    assert checkFlag == 1, 'Minimum boundary/region tag/flag must be 1'
+AssertionError: Minimum boundary/region tag/flag must be 1
+srun: error: qbc046: tasks 0-47: Exited with exit code 1
