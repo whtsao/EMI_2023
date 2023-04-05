@@ -1,0 +1,5 @@
+Autoloading mvapich2/2.3.3/gcc-9.3.0
+
+Loading proteus/1.8.1/gcc-9.3.0-mvapich2-2.3.3
+  Loading requirement: gcc/9.3.0 mvapich2/2.3.3/gcc-9.3.0
+slurmstepd: error: *** JOB 343526 ON qbc067 CANCELLED AT 2023-04-02T16:28:18 DUE TO TIME LIMIT ***
