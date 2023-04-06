@@ -147,7 +147,7 @@ ft = 1./(1.+rm)
 xi_opt = (3.*rm/8./(1.+rm))**0.5
 keq = mb2*(2.*np.pi*fny*ft)**2
 ceq = 2.*mb2*(2.*np.pi*fny*ft)
-cosa = spacing**2/(spacing**2+(0.5*tld_ly+0.5*fb_ly)**2) # square of cosine angle of spring and dashpot
+cosa = spacing**2/(spacing**2+(0.5*tld_lx+0.5*fb_lx)**2) # square of cosine angle of spring and dashpot
 ki = keq/2./cosa
 ci = ceq/2./cosa
 

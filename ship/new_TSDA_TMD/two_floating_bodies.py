@@ -51,6 +51,8 @@ opts= Context.Options([
     ("fnx",0.6104,"Natural frequency of sway motion of the main structure"),
     ("fny",0.6104,"Natural frequency of heave motion of the main structure"),
     ("fnz",0.6104,"Natural frequency of roll motion of the main structure"),
+    ("mooring",False,"True if the mooring lines are attached"),
+    ("ic_angle",0.,"Initial pitch angle of the floating platform (deg)"),
     ])
 
 # general options
@@ -90,8 +92,11 @@ fr = opts.fr
 fn = opts.fnz
 fc = fr*fn
 
-# wave options
+# wave channel
 water_level = 10.
+water_length = 30.
+
+# wave options
 wave_period = 1./fc
 wave_height = 0.1
 wave_direction = np.array([1., 0., 0.])
@@ -108,8 +113,6 @@ wave = wt.MonochromaticWaves(period=wave_period,
                              Nf=8)
 wavelength = wave.wavelength
 
-
-
 #  ____                        _
 # |  _ \  ___  _ __ ___   __ _(_)_ __
 # | | | |/ _ \| '_ ` _ \ / _` | | '_ \
@@ -122,38 +125,55 @@ domain = Domain.PlanarStraightLineGraphDomain()
 
 # ----- SHAPES ----- #
 
-# Wave tank length
-tank_length = 30.
-
 # Space between TLD and main structure
 spacing = 0.1
 
-# Floating body dimension
-fb_lx = 10.
-fb_ly = 5.
-fb_tho = 500.
-yst = fb_tho*fb_ly/rho_0
 
-# TLD dimension
-tld_lx = 10.
-tld_ly = 0.08
-tld_tho = 50.
+# Main structure dimensions
+body_w1 = 8.
+body_w2 = 1.
+body_h1 = 0.5
+body_h2 = 1.5
+
+#  --------w1--------
+#  |                |
+#  |                h1
+#  \               /
+#   \             / h2
+#    \-----w2----/
+
+thob = 400.
+mb1 = thob*(body_w1*body_h1+0.5*(body_w1+body_w2)*body_h2)
+by = rho_0*0.5*(body_w1+body_w2)*body_h2
+
+if mb1 < by:
+    w_temp = (2.*mb1/rho_0/body_h2*(body_w1-body_w2)+body_w2**2)**0.5
+    yst = 2.*mb1/rho_0/(w_temp+body_w2)
+else:
+    yst = (mb1-by)/rho_0/body_w1+body_h2
+
+ic_angle = (opts.ic_angle/180.)*math.pi
+
+
+# TMD dimension, assume a rectangular box
+tld_lx = body_w1
+tld_ly = 0.1*tld_lx
+tld_tho = 100.
 
 # Design vertical spring based on TMD theory
-mb1 = fb_lx*fb_ly*fb_tho
 mb2 = tld_lx*tld_ly*tld_tho
 rm = mb2/mb1
 ft = 1./(1.+rm)
 xi_opt = (3.*rm/8./(1.+rm))**0.5
 keq = mb2*(2.*np.pi*fny*ft)**2
 ceq = 2.*mb2*(2.*np.pi*fny*ft)
-cosa = spacing**2/(spacing**2+(0.5*tld_ly+0.5*fb_ly)**2) # square of cosine angle of spring and dashpot
+cosa = spacing**2/(spacing**2+(0.5*tld_lx+0.5*body_w1)**2) # square of cosine angle of spring and dashpot
 ki = keq/2./cosa
 ci = ceq/2./cosa
 
 # TANK
 #tank = st.Tank2D(domain, dim=(2*wavelength, 2*water_level))
-tank = st.Tank2D(domain, dim=(tank_length, 1.5*water_level))
+tank = st.Tank2D(domain, dim=(tank_length, 2.*water_level))
 
 # SPONGE LAYERS
 # generation zone: 1 wavelength
@@ -161,16 +181,67 @@ tank = st.Tank2D(domain, dim=(tank_length, 1.5*water_level))
 tank.setSponge(x_n=wavelength, x_p=wavelength)
 
 # MAIN STRUCTURE
-caisson1 = st.Rectangle(domain, dim=(fb_lx, fb_ly), coords=(0., 0.))
+#caisson1 = st.Rectangle(domain, dim=(fb_lx, fb_ly), coords=(0., 0.))
+
+w05 = 0.5*(body_w1-body_w2)
+vertices = np.array([
+    [w05,         0.], # 0
+    [w05+body_w2, 0.], # 1
+    [body_w1,     body_h2], # 2
+    [body_w1,     body_h1+body_h2], # 3
+    [0.,          body_h1+body_h2], # 4
+    [0.,          body_h2], # 5
+])
+
+# give flags to vertices (1 flag per vertex, here all have the same flag)
+vertexFlags = np.array([1 for ii in range(len(vertices))])
+# define segments
+segments = np.array([[ii-1, ii] for ii in range(1, len(vertices))])
+# add last segment
+segments = np.append(segments, [[len(vertices)-1, 0]], axis=0)
+# give flags to segments (1 flag per segment, here all have the same flag)
+segmentFlags = np.array([1 for ii in range(len(segments))])
+# define regions inside the body
+regions = np.array([[0.5*body_w1, body_h2]])
+regionFlags = np.array([1])
+# define holes inside the body
+holes = np.array([[0.5*body_w1, body_h2]])
+regionFlags = np.array([1])
+boundaryTags = {'wall': 1}
+# barycenter
+arm = body_w1*body_h1*(body_h2+0.5*body_h1)+0.5*(body_w1+body_w2)*body_h2*(body_w2+2.*body_w1)*body_h2/(body_w1+body_w2)/3.
+area = body_w1*body_h1+0.5*(body_w1+body_w2)*body_h2
+gy = arm/area
+barycenter = np.array([0.5*body_w1, gy, 0.])
+
+caisson1 = st.CustomShape(
+    domain=domain,
+    vertices=vertices,
+    vertexFlags=vertexFlags,
+    segments=segments,
+    segmentFlags=segmentFlags,
+    regions=regions,
+    regionFlags=regionFlags,
+    holes=holes,
+    boundaryTags=boundaryTags,
+    barycenter=barycenter,
+)
+
 # set barycenter in middle of caisson
-caisson1.setBarycenter([0., 0.])
+#caisson.setBarycenter([0., 0.])
 # caisson is considered a hole in the mesh
-caisson1.setHoles([[0., 0.]])
+#caisson.setHoles([[0., 0.]])
+
 # 2 following lines only for py2gmsh
 caisson1.holes_ind = np.array([0])
 tank.setChildShape(caisson1, 0)
 # translate caisson to middle of the tank
-caisson1.translate(np.array([0.5*tank_length, water_level+0.5*fb_ly-yst])) # 0.9 is to place the floating structure higher than the stactic position
+caisson1.translate(np.array([0.5*water_length-0.5*body_w1, water_level-0.8*yst])) # initial motion is getting down
+caisson1.rotate(rot = ic_angle)
+
+
+
+
 
 #DAMPER
 caisson2 = st.Rectangle(domain, dim=(tld_lx, tld_ly), coords=(0., 0.))

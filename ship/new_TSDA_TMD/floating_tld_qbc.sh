@@ -1,6 +1,6 @@
 #!/bin/bash
-#SBATCH -N 2
-#SBATCH -n 96
+#SBATCH -N 1
+#SBATCH -n 16
 #SBATCH -c 1 # specify 6 threads per process
 #SBATCH -t 00:10:00
 #SBATCH -p workq
