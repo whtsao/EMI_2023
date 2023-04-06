@@ -130,7 +130,7 @@ domain = Domain.PlanarStraightLineGraphDomain()
 # ----- SHAPES ----- #
 
 # Space between TLD and main structure
-spacing = 0.1
+spacing = 1.
 
 
 # Main structure dimensions
