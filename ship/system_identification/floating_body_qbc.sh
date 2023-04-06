@@ -21,7 +21,7 @@ cp $SLURM_SUBMIT_DIR/*.py .
 #cp $SLURM_SUBMIT_DIR/petsc.options.asm .
 cp $SLURM_SUBMIT_DIR/*.sh .
 
-parun --TwoPhaseFlow pmtld.py -l 5 -C "he=1."
+parun --TwoPhaseFlow pmtld.py -l 5 -C "he=0.5"
 #srun parun --TwoPhaseFlow pmtld.py -F -l 5 -C "he=0.002 fr=1.0" -O petsc.options.asm
 
 date

@@ -22,7 +22,7 @@ opts= Context.Options([
     ("fny",0.6104,"Natural frequency of heave motion"),
     ("fnz",0.6104,"Natural frequency of roll motion"),
     ("mooring",False,"True if the mooring lines are attached"),
-    ("ic_angle",10.,"Initial pitch angle of the floating platform (deg)"),
+    ("ic_angle",0.,"Initial pitch angle of the floating platform (deg)"),
     ])
 
 T = opts.T
@@ -57,18 +57,28 @@ fn = opts.fnz
 fc = fr*fn
 
 # Main structure dimensions
-body_w1 = 4.
+body_w1 = 8.
 body_w2 = 1.
 body_h1 = 0.5
 body_h2 = 1.5
 
-thob = 100.
+#  --------w1--------
+#  |                |
+#  |                h1
+#  \               /
+#   \             / h2
+#    \-----w2----/
 
+thob = 500.
 mb = thob*(body_w1*body_h1+0.5*(body_w1+body_w2)*body_h2)
 by = rho_0*0.5*(body_w1+body_w2)*body_h2
 
-if mb<=by:
-yst = thob*body_h/rho_0
+if mb < by:
+    w_temp = (2.*mb/rho_0/body_h2*(body_w1-body_w2)+body_w2**2)**0.5
+    yst = 2.*mb/rho_0/(w_temp+body_w2)
+else:
+    yst = (mb-by)/rho_0/body_w1+body_h2
+
 ic_angle = (opts.ic_angle/180.)*math.pi
 
 # TLD parameters
@@ -81,7 +91,7 @@ water_level = 10.
 water_length = 30.
 
 # Regular wave parameters
-wave_period = 1/(fc)
+wave_period = 1/fc
 wave_height = 0.1
 wave_direction = np.array([1., 0., 0.])
 wave_type = 'Fenton'  #'Linear'
@@ -121,16 +131,62 @@ tank = st.Tank2D(domain, dim=(water_length, 2.*water_level))
 #tank.setSponge(x_n=3., x_p=3.)
 
 # FLOATING STRUCTURE (main structure)
-caisson = st.Rectangle(domain, dim=(body_w, body_h), coords=(0., 0.))
+#caisson = st.Rectangle(domain, dim=(body_w, body_h), coords=(0., 0.))
+
+w05 = 0.5*(body_w1-body_w2)
+vertices = np.array([
+    [w05,         0.], # 0
+    [w05+body_w2, 0.], # 1
+    [body_w1,     body_h2], # 2
+    [body_w1,     body_h1+body_h2], # 3
+    [0.,          body_h1+body_h2], # 4
+    [0.,          body_h2], # 5
+])
+
+# give flags to vertices (1 flag per vertex, here all have the same flag)
+vertexFlags = np.array([1 for ii in range(len(vertices))])
+# define segments
+segments = np.array([[ii-1, ii] for ii in range(1, len(vertices))])
+# add last segment
+segments = np.append(segments, [[len(vertices)-1, 0]], axis=0)
+# give flags to segments (1 flag per segment, here all have the same flag)
+segmentFlags = np.array([1 for ii in range(len(segments))])
+# define regions inside the body
+regions = np.array([[0.5*body_w1, body_h2]])
+regionFlags = np.array([1])
+# define holes inside the body
+holes = np.array([[0.5*body_w1, body_h2]])
+regionFlags = np.array([1])
+boundaryTags = {'wall': 1}
+# barycenter
+arm = body_w1*body_h1*(body_h2+0.5*body_h1)+0.5*(body_w1+body_w2)*body_h2*(body_w2+2.*body_w1)*body_h2/(body_w1+body_w2)/3.
+area = body_w1*body_h1+0.5*(body_w1+body_w2)*body_h2
+gy = arm/area
+barycenter = np.array([0.5*body_w1, gy, 0.])
+
+caisson = st.CustomShape(
+    domain=domain,
+    vertices=vertices,
+    vertexFlags=vertexFlags,
+    segments=segments,
+    segmentFlags=segmentFlags,
+    regions=regions,
+    regionFlags=regionFlags,
+    holes=holes,
+    boundaryTags=boundaryTags,
+    barycenter=barycenter,
+)
+
 # set barycenter in middle of caisson
-caisson.setBarycenter([0., 0.])
+#caisson.setBarycenter([0., 0.])
 # caisson is considered a hole in the mesh
-caisson.setHoles([[0., 0.]])
+#caisson.setHoles([[0., 0.]])
+
 # 2 following lines only for py2gmsh
 caisson.holes_ind = np.array([0])
 tank.setChildShape(caisson, 0)
 # translate caisson to middle of the tank
-caisson.translate(np.array([0.5*water_length, water_level+0.5*body_h-0.8*yst])) # 0.9 is to place the floating structure higher than the stactic position
+caisson.translate(np.array([0.5*water_length-0.5*body_w1, water_level-0.8*yst])) # initial motion is getting down
 caisson.rotate(rot = ic_angle)
 
 #   ____ _
@@ -179,10 +235,10 @@ body.setConstraints(free_x=free_x, free_r=free_r)
 # body.ChBody.SetMass(14.5)
 
 # set main structure density, mass, and moment of inertia
-mb = thob*body_w*body_h
 body.setMass(mb)
 
-mbi = mb*(body_w*body_w+body_h*body_h)/12.
+mbi = 0.8*mb*(body_w1**2+(body_h1+body_h2)**2)/12. # very rough estimation
+
 body.setInertiaXX(np.array([1., 1., mbi]))
 
 # set inertia
