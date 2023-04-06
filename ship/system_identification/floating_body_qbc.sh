@@ -2,7 +2,7 @@
 #SBATCH -N 1
 #SBATCH -n 1
 #SBATCH -c 1 # specify 6 threads per process
-#SBATCH -t 00:10:00
+#SBATCH -t 12:0:00
 #SBATCH -p workq
 #SBATCH -A loni_proteus01s
 #SBATCH -o o.out # optional, name of the stdout, using the job number (%j) and the first node (%N)
@@ -21,7 +21,7 @@ cp $SLURM_SUBMIT_DIR/*.py .
 #cp $SLURM_SUBMIT_DIR/petsc.options.asm .
 cp $SLURM_SUBMIT_DIR/*.sh .
 
-parun --TwoPhaseFlow pmtld.py -l 5 -C "he=0.5"
+parun --TwoPhaseFlow pmtld.py -l 5 -C "he=0.1"
 #srun parun --TwoPhaseFlow pmtld.py -F -l 5 -C "he=0.002 fr=1.0" -O petsc.options.asm
 
 date

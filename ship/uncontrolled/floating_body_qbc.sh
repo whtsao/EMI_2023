@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH -N 1
-#SBATCH -n 48
+#SBATCH -n 16
 #SBATCH -c 1 # specify 6 threads per process
 #SBATCH -t 00:10:00
 #SBATCH -p workq
@@ -21,7 +21,7 @@ cp $SLURM_SUBMIT_DIR/*.py .
 #cp $SLURM_SUBMIT_DIR/petsc.options.asm .
 cp $SLURM_SUBMIT_DIR/*.sh .
 
-parun --TwoPhaseFlow pmtld.py -l 5 -C "he=0.1 fr=1.0"
+parun --TwoPhaseFlow pmtld.py -l 5 -C "he=0.5 fr=1.0"
 #srun parun --TwoPhaseFlow pmtld.py -F -l 5 -C "he=0.002 fr=1.0" -O petsc.options.asm
 
 date

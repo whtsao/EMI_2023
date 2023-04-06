@@ -69,7 +69,7 @@ body_h2 = 1.5
 #   \             / h2
 #    \-----w2----/
 
-thob = 500.
+thob = 400.
 mb = thob*(body_w1*body_h1+0.5*(body_w1+body_w2)*body_h2)
 by = rho_0*0.5*(body_w1+body_w2)*body_h2
 
@@ -88,7 +88,7 @@ tld_t = 0.05
 
 # wave channel
 water_level = 10.
-water_length = 30.
+water_length = 50.
 
 # Regular wave parameters
 wave_period = 1/fc
