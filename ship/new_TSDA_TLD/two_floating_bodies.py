@@ -69,6 +69,10 @@ he = opts.he
 # rate at which values are recorded
 sampleRate = 0.05
 
+# for physical configurations
+mooring = opts.mooring
+fill_water = opts.fill_water
+
 # for ALE formulation
 movingDomain = True
 # for added mass stabilization
@@ -128,7 +132,7 @@ domain = Domain.PlanarStraightLineGraphDomain()
 # ----- SHAPES ----- #
 
 # Space between TLD and main structure
-spacing = 0.1
+spacing = 1.
 
 
 # Main structure dimensions
@@ -247,10 +251,9 @@ caisson1.translate(np.array([0.5*water_length-0.5*body_w1, water_level-yst])) # 
 #caisson1.rotate(rot = ic_angle)
 
 
-#DAMPER
+# DAMPER
+
 #caisson2 = st.Rectangle(domain, dim=(tld_lx, tld_ly), coords=(0., 0.))
-
-
 vertices2 = np.array([
     [0.,           0.], # 0
     [tld_lx,       0.], # 1
@@ -384,7 +387,7 @@ body.setMass(mb2)
 # set inertia
 # can also be set with:
 # body.ChBody.setInertiaXX(pychrono.ChVectorD(1., 1., 0.35))
-ib2 = # this is a rough estimation
+ib2 = mb2*(tld_lx**2+4.*tld_t**2)/12. # this is a rough estimation
 body.setInertiaXX(np.array([1., 1., ib2]))
 # record values
 body.setRecordValues(all_values=True)

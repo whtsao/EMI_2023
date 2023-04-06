@@ -68,6 +68,9 @@ he = opts.he
 # rate at which values are recorded
 sampleRate = 0.05
 
+# physical configurations
+mooring = opts.mooring
+
 # for ALE formulation
 movingDomain = True
 # for added mass stabilization
