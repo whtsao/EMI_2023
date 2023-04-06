@@ -53,6 +53,7 @@ opts= Context.Options([
     ("fny",0.6104,"Natural frequency of heave motion of the main structure"),
     ("fnz",0.6104,"Natural frequency of roll motion of the main structure"),
     ("mooring",False,"True if the mooring lines are attached"),
+    ("fill_water",False,"True if the mooring lines are attached"),
     ("ic_angle",0.,"Initial pitch angle of the floating platform (deg)"),
     ])
 
@@ -157,17 +158,22 @@ ic_angle = (opts.ic_angle/180.)*math.pi
 
 
 # TMD dimension, assume a rectangular box
-tld_lx = body_w1
-tld_ly = 0.1*tld_lx
-tld_tho = 100.
+tld_w = 5.
+tld_h = 0.5. # this is water depth of the TLD
+
+tld_t = 0.05
+tld_lx = tld_w+2.*tld_t
+tld_ly = 3.*tld_h
+tld_tho = 10.
+mw = rho_0*tld_h*tld_w
 
 # Design vertical spring based on TMD theory
-mb2 = tld_lx*tld_ly*tld_tho
-rm = mb2/mb1
+mb2 = tld_tho*(tld_lx*tld_ly-(tld_ly-tld_t)*tld_w)
+rm = (mw+mb2)/mb1
 ft = 1./(1.+rm)
 xi_opt = (3.*rm/8./(1.+rm))**0.5
-keq = mb2*(2.*np.pi*fny*ft)**2
-ceq = 2.*mb2*(2.*np.pi*fny*ft)
+keq = (mw+mb2)*(2.*np.pi*fny*ft)**2
+ceq = 2.*(mw+mb2)*(2.*np.pi*fny*ft)
 cosa = spacing**2/(spacing**2+(0.5*tld_lx+0.5*body_w1)**2) # square of cosine angle of spring and dashpot
 ki = keq/2./cosa
 ci = ceq/2./cosa
@@ -238,21 +244,68 @@ caisson1.holes_ind = np.array([0])
 tank.setChildShape(caisson1, 0)
 # translate caisson to middle of the tank
 caisson1.translate(np.array([0.5*water_length-0.5*body_w1, water_level-yst])) # initial motion is getting down
-caisson1.rotate(rot = ic_angle)
+#caisson1.rotate(rot = ic_angle)
 
 
 #DAMPER
-caisson2 = st.Rectangle(domain, dim=(tld_lx, tld_ly), coords=(0., 0.))
+#caisson2 = st.Rectangle(domain, dim=(tld_lx, tld_ly), coords=(0., 0.))
+
+
+vertices2 = np.array([
+    [0.,           0.], # 0
+    [tld_lx,       0.], # 1
+    [tld_lx,       tld_ly], # 2
+    [tld_lx-tld_t, tld_ly], # 3
+    [tld_lx-tld_t, tld_t], # 4
+    [tld_t,        tld_t], # 5
+    [tld_t,        tld_ly], # 6
+    [0.,           tld_ly], # 7
+])
+
+# give flags to vertices (1 flag per vertex, here all have the same flag)
+vertexFlags2 = np.array([1 for ii in range(len(vertices2))])
+# define segments
+segments2 = np.array([[ii-1, ii] for ii in range(1, len(vertices2))])
+# add last segment
+segments2 = np.append(segments, [[len(vertices2)-1, 0]], axis=0)
+# give flags to segments (1 flag per segment, here all have the same flag)
+segmentFlags2 = np.array([1 for ii in range(len(segments2))])
+# define regions inside the body
+regions2 = np.array([[0.5*tld_lx, 0.5*tld_t]])
+regionFlags2 = np.array([1])
+# define holes inside the body
+holes2 = np.array([[0.5*tld_lx, 0.5*tld_t]])
+regionFlags2 = np.array([1])
+boundaryTags2 = {'wall': 1}
+# barycenter
+arm = 2.*tld_t*tld_ly*0.5*tld_ly+tld_w*tld_t*0.5*tld_t
+area = tld_lx*tld_ly-tld_w*(tld_ly-tld_t)
+gy = arm/area
+barycenter = np.array([0.5*tld_lx, gy, 0.])
+
+caisson2 = st.CustomShape(
+    domain=domain,
+    vertices=vertices2,
+    vertexFlags=vertexFlags2,
+    segments=segments2,
+    segmentFlags=segmentFlags2,
+    regions=regions2,
+    regionFlags=regionFlags2,
+    holes=holes2,
+    boundaryTags=boundaryTags2,
+    barycenter=barycenter2,
+)
+
 # set barycenter in middle of caisson
-caisson2.setBarycenter([0., 0.])
+#caisson2.setBarycenter([0., 0.])
 # caisson is considered a hole in the mesh
-caisson2.setHoles([[0., 0.]])
+#caisson2.setHoles([[0., 0.]])
+
 # 2 following lines only for py2gmsh
 caisson2.holes_ind = np.array([0])
 tank.setChildShape(caisson2, 0)
 # translate caisson to middle of the tank
-caisson2.translate(np.array([0.5*tank_length, water_level+body_h1+body_h2-yst+spacing+0.5*tld_ly]))
-
+caisson2.translate(np.array([0.5*tank_length-0.5*tld_lx, water_level+body_h1+body_h2-yst+spacing]))
 
 
 #   ____ _
@@ -299,7 +352,6 @@ body.setConstraints(free_x=free_x, free_r=free_r)
 # set mass
 # can also be set with:
 # body.ChBody.SetMass(14.5)
-#mb1 = fb_lx*fb_ly*fb_tho
 body.setMass(mb1)
 # set inertia
 # can also be set with:
@@ -328,12 +380,11 @@ body.setConstraints(free_x=free_x, free_r=free_r)
 # set mass
 # can also be set with:
 # body.ChBody.SetMass(14.5)
-#mb2 = tld_lx*tld_ly*tld_tho
 body.setMass(mb2)
 # set inertia
 # can also be set with:
 # body.ChBody.setInertiaXX(pychrono.ChVectorD(1., 1., 0.35))
-ib2 = mb2*(tld_lx**2+tld_ly**2)/12.
+ib2 = # this is a rough estimation
 body.setInertiaXX(np.array([1., 1., ib2]))
 # record values
 body.setRecordValues(all_values=True)
@@ -469,14 +520,41 @@ class PHI_IC:
     def uOfXT(self, x, t):
         return x[nd-1] - water_level
 
-# instanciating the classes for *_p.py files
-initialConditions = {'pressure': P_IC(),
-                     'vel_u': U_IC(),
-                     'vel_v': V_IC(),
-                     'vel_w': W_IC(),
-                     'vof': VF_IC(),
-                     'ncls': PHI_IC(),
-                     'rdls': PHI_IC()}
+
+class P_IC_TLD:
+    def uOfXT(self, x, t):
+        p_L = 0.0
+        phi_L = tank.dim[nd-1] - water_level
+        phi = x[nd-1] - water_level
+        p = p_L -g[nd-1]*(rho_0*(phi_L - phi)
+                          +(rho_1 -rho_0)*(smoothedHeaviside_integral(smoothing,phi_L)
+                                                -smoothedHeaviside_integral(smoothing,phi)))
+        return p
+class VF_IC_TLD:
+    def uOfXT(self, x, t):
+        return smoothedHeaviside(smoothing, x[nd-1]-water_level)
+class PHI_IC_TLD:
+    def uOfXT(self, x, t):
+        return x[nd-1] - water_level
+
+
+if not fill_water: # empty TLD
+    initialConditions = {'pressure': P_IC(),
+                         'vel_u': U_IC(),
+                         'vel_v': V_IC(),
+                         'vel_w': W_IC(),
+                         'vof': VF_IC(),
+                         'ncls': PHI_IC(),
+                         'rdls': PHI_IC()}
+else: # fill water in the TLD
+    initialConditions = {'pressure': P_IC_TLD(),
+                         'vel_u': U_IC(),
+                         'vel_v': V_IC(),
+                         'vel_w': W_IC(),
+                         'vof': VF_IC_TLD(),
+                         'ncls': PHI_IC_TLD(),
+                         'rdls': PHI_IC_TLD()}
+
 
 #  __  __           _        ___        _   _
 # |  \/  | ___  ___| |__    / _ \ _ __ | |_(_) ___  _ __  ___

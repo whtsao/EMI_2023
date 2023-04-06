@@ -7,7 +7,7 @@
 #SBATCH -A loni_proteus01s
 #SBATCH -o o.out # optional, name of the stdout, using the job number (%j) and the first node (%N)
 #SBATCH -e e.err # optional, name of the stderr, using job and first node values
-#SBATCH -J emi2023_2d_floating_tmd_fr100
+#SBATCH -J emi2023_2d_floating_tld_fr100
 
 date
 
