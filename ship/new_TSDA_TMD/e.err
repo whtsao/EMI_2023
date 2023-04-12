@@ -7,6 +7,10 @@ Traceback (most recent call last):
     exec(compile(f.read(), __file__, 'exec'))
   File "/ddnA/project/cekees/whtsao/proteus/scripts/parun", line 372, in <module>
     case = __import__(name)
-  File "/ddnA/work/whtsao/emi2023_2d_floating_tmd_fr100.344281/./two_floating_bodies.py", line 155, in <module>
-    ic_angle = (opts.ic_angle/180.)*math.pi
-NameError: name 'math' is not defined
+  File "/ddnA/work/whtsao/emi2023_ship_tmd_fr100.345784/./two_floating_bodies.py", line 501, in <module>
+    st.assembleDomain(domain)
+  File "/ddnA/project/cekees/whtsao/proteus/proteus/mprans/SpatialTools.py", line 2051, in assembleDomain
+    _assembleGeometry(domain, BC_class=bc.BC_RANS)
+  File "/ddnA/project/cekees/whtsao/proteus/proteus/SpatialTools.py", line 1499, in _assembleGeometry
+    for child_fac in child_facs:
+TypeError: 'NoneType' object is not iterable

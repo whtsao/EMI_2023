@@ -52,6 +52,9 @@ g = np.array([0., -9.81, 0.])
 fixed = False
 
 # forcing frequency
+fnx = opts.fnx
+fny = opts.fny
+fnz = opts.fnz
 fr = opts.fr
 fn = opts.fnz
 fc = fr*fn

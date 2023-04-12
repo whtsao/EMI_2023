@@ -92,6 +92,10 @@ g = np.array([0., -9.81, 0.])
 fixed = False
 
 # forcing frequency (aim at roll motion)
+fnx = opts.fnx
+fny = opts.fny
+fnz = opts.fnz
+
 fr = opts.fr
 fn = opts.fnz
 fc = fr*fn
@@ -177,7 +181,7 @@ ci = ceq/2./cosa
 
 # TANK
 #tank = st.Tank2D(domain, dim=(2*wavelength, 2*water_level))
-tank = st.Tank2D(domain, dim=(tank_length, 2.*water_level))
+tank = st.Tank2D(domain, dim=(water_length, 4.*water_level))
 
 # SPONGE LAYERS
 # generation zone: 1 wavelength
@@ -188,7 +192,7 @@ tank.setSponge(x_n=wavelength, x_p=wavelength)
 #caisson1 = st.Rectangle(domain, dim=(fb_lx, fb_ly), coords=(0., 0.))
 
 w05 = 0.5*(body_w1-body_w2)
-vertices = np.array([
+vertices1 = np.array([
     [w05,         0.], # 0
     [w05+body_w2, 0.], # 1
     [body_w1,     body_h2], # 2
@@ -198,37 +202,37 @@ vertices = np.array([
 ])
 
 # give flags to vertices (1 flag per vertex, here all have the same flag)
-vertexFlags = np.array([1 for ii in range(len(vertices))])
+vertexFlags1 = np.array([1 for ii in range(len(vertices1))])
 # define segments
-segments = np.array([[ii-1, ii] for ii in range(1, len(vertices))])
+segments1 = np.array([[ii-1, ii] for ii in range(1, len(vertices1))])
 # add last segment
-segments = np.append(segments, [[len(vertices)-1, 0]], axis=0)
+segments1 = np.append(segments1, [[len(vertices1)-1, 0]], axis=0)
 # give flags to segments (1 flag per segment, here all have the same flag)
-segmentFlags = np.array([1 for ii in range(len(segments))])
+segmentFlags1 = np.array([1 for ii in range(len(segments1))])
 # define regions inside the body
-regions = np.array([[0.5*body_w1, body_h2]])
-regionFlags = np.array([1])
+regions1 = np.array([[0.5*body_w1, body_h2]])
+regionFlags1 = np.array([1])
 # define holes inside the body
-holes = np.array([[0.5*body_w1, body_h2]])
-regionFlags = np.array([1])
-boundaryTags = {'wall': 1}
+holes1 = np.array([[0.5*body_w1, body_h2]])
+regionFlags1 = np.array([1])
+boundaryTags1 = {'wall': 1}
 # barycenter
 arm = body_w1*body_h1*(body_h2+0.5*body_h1)+0.5*(body_w1+body_w2)*body_h2*(body_w2+2.*body_w1)*body_h2/(body_w1+body_w2)/3.
 area = body_w1*body_h1+0.5*(body_w1+body_w2)*body_h2
 gy = arm/area
-barycenter = np.array([0.5*body_w1, gy, 0.])
+barycenter1 = np.array([0.5*body_w1, gy, 0.])
 
 caisson1 = st.CustomShape(
     domain=domain,
-    vertices=vertices,
-    vertexFlags=vertexFlags,
-    segments=segments,
-    segmentFlags=segmentFlags,
-    regions=regions,
-    regionFlags=regionFlags,
-    holes=holes,
-    boundaryTags=boundaryTags,
-    barycenter=barycenter,
+    vertices=vertices1,
+    vertexFlags=vertexFlags1,
+    segments=segments1,
+    segmentFlags=segmentFlags1,
+    regions=regions1,
+    regionFlags=regionFlags1,
+    holes=holes1,
+    boundaryTags=boundaryTags1,
+    barycenter=barycenter1,
 )
 
 # set barycenter in middle of caisson
@@ -241,7 +245,7 @@ caisson1.holes_ind = np.array([0])
 tank.setChildShape(caisson1, 0)
 # translate caisson to middle of the tank
 caisson1.translate(np.array([0.5*water_length-0.5*body_w1, water_level-yst])) # initial motion is getting down
-caisson1.rotate(rot = ic_angle)
+#caisson1.rotate(rot = ic_angle)
 
 
 #DAMPER
@@ -254,7 +258,7 @@ caisson2.setHoles([[0., 0.]])
 caisson2.holes_ind = np.array([0])
 tank.setChildShape(caisson2, 0)
 # translate caisson to middle of the tank
-caisson2.translate(np.array([0.5*tank_length, water_level+body_h1+body_h2-yst+spacing+0.5*tld_ly]))
+caisson2.translate(np.array([0.5*water_length, water_level+body_h1+body_h2-yst+spacing+0.5*tld_ly]))
 
 
 
@@ -307,7 +311,7 @@ body.setMass(mb1)
 # set inertia
 # can also be set with:
 # body.ChBody.setInertiaXX(pychrono.ChVectorD(1., 1., 0.35))
-ib1 = 0.8*mb*(body_w1**2+(body_h1+body_h2)**2)/12. # very rough estimation
+ib1 = 0.8*mb1*(body_w1**2+(body_h1+body_h2)**2)/12. # very rough estimation
 body.setInertiaXX(np.array([1., 1., ib1]))
 # record values
 body.setRecordValues(all_values=True)
@@ -343,8 +347,8 @@ body.setRecordValues(all_values=True)
 
 # SPRING 1 (left tilted)
 TSDA1 = pychrono.ChLinkTSDA()
-body1_point = pychrono.ChVectorD(0.5*tank_length-0.5*body_w1,water_level+body_h1+body_h2-yst,0.0)
-body2_point = pychrono.ChVectorD(0.5*tank_length+0.5*tld_lx,water_level+body_h1+body_h2-yst+spacing,0.0)
+body1_point = pychrono.ChVectorD(0.5*water_length-0.5*body_w1,water_level+body_h1+body_h2-yst,0.0)
+body2_point = pychrono.ChVectorD(0.5*water_length+0.5*tld_lx,water_level+body_h1+body_h2-yst+spacing,0.0)
 
 TSDA1.Initialize(system.subcomponents[0].ChBody,
                                     system.subcomponents[1].ChBody,
@@ -358,8 +362,8 @@ system.ChSystem.Add(TSDA1)
 
 # SPRING 2 (middle vertical)
 #TSDA2 = pychrono.ChLinkTSDA()
-#body1_point = pychrono.ChVectorD(0.5*tank_length,water_level+body_h1+body_h2-yst,0.0)
-#body2_point = pychrono.ChVectorD(0.5*tank_length,water_level+body_h1+body_h2-yst+spacing,0.0)
+#body1_point = pychrono.ChVectorD(0.5*water_length,water_level+body_h1+body_h2-yst,0.0)
+#body2_point = pychrono.ChVectorD(0.5*water_length,water_level+body_h1+body_h2-yst+spacing,0.0)
 
 #TSDA2.Initialize(system.subcomponents[0].ChBody,
 #                                    system.subcomponents[1].ChBody,
@@ -372,8 +376,8 @@ system.ChSystem.Add(TSDA1)
 
 # SPRING 3 (right tilted)
 TSDA3 = pychrono.ChLinkTSDA()
-body1_point = pychrono.ChVectorD(0.5*tank_length+0.5*body_w1,water_level+body_h1+body_h2-yst,0.0)
-body2_point = pychrono.ChVectorD(0.5*tank_length-0.5*tld_lx,water_level+body_h1+body_h2-yst+spacing,0.0)
+body1_point = pychrono.ChVectorD(0.5*water_length+0.5*body_w1,water_level+body_h1+body_h2-yst,0.0)
+body2_point = pychrono.ChVectorD(0.5*water_length-0.5*tld_lx,water_level+body_h1+body_h2-yst+spacing,0.0)
 
 TSDA3.Initialize(system.subcomponents[0].ChBody,
                                     system.subcomponents[1].ChBody,

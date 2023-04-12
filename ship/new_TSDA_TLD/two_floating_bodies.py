@@ -94,6 +94,10 @@ g = np.array([0., -9.81, 0.])
 fixed = False
 
 # forcing frequency (aim at roll motion)
+fnx = opts.fnx
+fny = opts.fny
+fnz = opts.fnz
+
 fr = opts.fr
 fn = opts.fnz
 fc = fr*fn
@@ -163,9 +167,9 @@ ic_angle = (opts.ic_angle/180.)*math.pi
 
 # TMD dimension, assume a rectangular box
 tld_w = 5.
-tld_h = 0.5. # this is water depth of the TLD
+tld_h = 0.5 # this is water depth of the TLD
 
-tld_t = 0.05
+tld_t = 0.1
 tld_lx = tld_w+2.*tld_t
 tld_ly = 3.*tld_h
 tld_tho = 10.
@@ -184,7 +188,7 @@ ci = ceq/2./cosa
 
 # TANK
 #tank = st.Tank2D(domain, dim=(2*wavelength, 2*water_level))
-tank = st.Tank2D(domain, dim=(tank_length, 2.*water_level))
+tank = st.Tank2D(domain, dim=(water_length, 2.*water_level))
 
 # SPONGE LAYERS
 # generation zone: 1 wavelength
@@ -270,7 +274,7 @@ vertexFlags2 = np.array([1 for ii in range(len(vertices2))])
 # define segments
 segments2 = np.array([[ii-1, ii] for ii in range(1, len(vertices2))])
 # add last segment
-segments2 = np.append(segments, [[len(vertices2)-1, 0]], axis=0)
+segments2 = np.append(segments2, [[len(vertices2)-1, 0]], axis=0)
 # give flags to segments (1 flag per segment, here all have the same flag)
 segmentFlags2 = np.array([1 for ii in range(len(segments2))])
 # define regions inside the body
@@ -284,7 +288,7 @@ boundaryTags2 = {'wall': 1}
 arm = 2.*tld_t*tld_ly*0.5*tld_ly+tld_w*tld_t*0.5*tld_t
 area = tld_lx*tld_ly-tld_w*(tld_ly-tld_t)
 gy = arm/area
-barycenter = np.array([0.5*tld_lx, gy, 0.])
+barycenter2 = np.array([0.5*tld_lx, gy, 0.])
 
 caisson2 = st.CustomShape(
     domain=domain,
@@ -308,7 +312,7 @@ caisson2 = st.CustomShape(
 caisson2.holes_ind = np.array([0])
 tank.setChildShape(caisson2, 0)
 # translate caisson to middle of the tank
-caisson2.translate(np.array([0.5*tank_length-0.5*tld_lx, water_level+body_h1+body_h2-yst+spacing]))
+caisson2.translate(np.array([0.5*water_length-0.5*tld_lx, water_level+body_h1+body_h2-yst+spacing]))
 
 
 #   ____ _
@@ -359,7 +363,7 @@ body.setMass(mb1)
 # set inertia
 # can also be set with:
 # body.ChBody.setInertiaXX(pychrono.ChVectorD(1., 1., 0.35))
-ib1 = 0.8*mb*(body_w1**2+(body_h1+body_h2)**2)/12. # very rough estimation
+ib1 = 0.8*mb1*(body_w1**2+(body_h1+body_h2)**2)/12. # very rough estimation
 body.setInertiaXX(np.array([1., 1., ib1]))
 # record values
 body.setRecordValues(all_values=True)
@@ -394,8 +398,8 @@ body.setRecordValues(all_values=True)
 
 # SPRING 1 (left tilted)
 TSDA1 = pychrono.ChLinkTSDA()
-body1_point = pychrono.ChVectorD(0.5*tank_length-0.5*body_w1,water_level+body_h1+body_h2-yst,0.0)
-body2_point = pychrono.ChVectorD(0.5*tank_length+0.5*tld_lx,water_level+body_h1+body_h2-yst+spacing,0.0)
+body1_point = pychrono.ChVectorD(0.5*water_length-0.5*body_w1,water_level+body_h1+body_h2-yst,0.0)
+body2_point = pychrono.ChVectorD(0.5*water_length+0.5*tld_lx,water_level+body_h1+body_h2-yst+spacing,0.0)
 
 TSDA1.Initialize(system.subcomponents[0].ChBody,
                                     system.subcomponents[1].ChBody,
@@ -409,8 +413,8 @@ system.ChSystem.Add(TSDA1)
 
 # SPRING 2 (middle vertical)
 #TSDA2 = pychrono.ChLinkTSDA()
-#body1_point = pychrono.ChVectorD(0.5*tank_length,water_level+body_h1+body_h2-yst,0.0)
-#body2_point = pychrono.ChVectorD(0.5*tank_length,water_level+body_h1+body_h2-yst+spacing,0.0)
+#body1_point = pychrono.ChVectorD(0.5*water_length,water_level+body_h1+body_h2-yst,0.0)
+#body2_point = pychrono.ChVectorD(0.5*water_length,water_level+body_h1+body_h2-yst+spacing,0.0)
 
 #TSDA2.Initialize(system.subcomponents[0].ChBody,
 #                                    system.subcomponents[1].ChBody,
@@ -423,8 +427,8 @@ system.ChSystem.Add(TSDA1)
 
 # SPRING 3 (right tilted)
 TSDA3 = pychrono.ChLinkTSDA()
-body1_point = pychrono.ChVectorD(0.5*tank_length+0.5*body_w1,water_level+body_h1+body_h2-yst,0.0)
-body2_point = pychrono.ChVectorD(0.5*tank_length-0.5*tld_lx,water_level+body_h1+body_h2-yst+spacing,0.0)
+body1_point = pychrono.ChVectorD(0.5*water_length+0.5*body_w1,water_level+body_h1+body_h2-yst,0.0)
+body2_point = pychrono.ChVectorD(0.5*water_length-0.5*tld_lx,water_level+body_h1+body_h2-yst+spacing,0.0)
 
 TSDA3.Initialize(system.subcomponents[0].ChBody,
                                     system.subcomponents[1].ChBody,
