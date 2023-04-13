@@ -48,6 +48,7 @@ opts= Context.Options([
     ("dt_output",0.1,"Time interval to output solution"),
     ("cfl",0.5,"Desired CFL restriction"),
     ("he",0.05,"he relative to Length of domain in x"),
+    ("wave_height",0.5,"Wave height"),
     ("fr",1.0,"Forcing frequency ratio"),
     ("fnx",0.6104,"Natural frequency of sway motion of the main structure"),
     ("fny",0.6104,"Natural frequency of heave motion of the main structure"),
@@ -108,7 +109,7 @@ water_length = 30.
 
 # wave options
 wave_period = 1./fc
-wave_height = 0.1
+wave_height = opts.wave_height
 wave_direction = np.array([1., 0., 0.])
 wave_type = 'Fenton'  #'Linear'
 # number of Fourier coefficients
@@ -169,10 +170,10 @@ ic_angle = (opts.ic_angle/180.)*math.pi
 tld_w = 5.
 tld_h = 0.5 # this is water depth of the TLD
 
-tld_t = 0.1
+tld_t = 0.2
 tld_lx = tld_w+2.*tld_t
 tld_ly = 3.*tld_h
-tld_tho = 10.
+tld_tho = 200.
 mw = rho_0*tld_h*tld_w
 
 # Design vertical spring based on TMD theory

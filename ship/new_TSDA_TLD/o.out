@@ -1,9 +1,9 @@
-Tue Apr 11 16:52:46 CDT 2023
+Thu Apr 13 10:26:14 CDT 2023
 # Wave
 
 # Printing input data here to check
 
-# Height/Depth: 0.010
+# Height/Depth: 0.050
 # Dimensionless Period T*sqrt(g/d):   1.62
 # Current criterion: Euler,  Dimensionless value: 0.000
 
@@ -12,10 +12,12 @@ Tue Apr 11 16:52:46 CDT 2023
 
 Height step  1 of  1
 
-Iteration  1: Mean of corrections to free surface:  2.2e-03
-Iteration  2: Mean of corrections to free surface:  1.3e-05
-Iteration  3: Mean of corrections to free surface:  5.5e-09
-Iteration  4: Mean of corrections to free surface:  6.5e-13
+Iteration  1: Mean of corrections to free surface:  8.9e-02
+Iteration  2: Mean of corrections to free surface:  3.4e-02
+Iteration  3: Mean of corrections to free surface:  4.4e-03
+Iteration  4: Mean of corrections to free surface:  2.3e-05
+Iteration  5: Mean of corrections to free surface:  5.0e-08
+Iteration  6: Mean of corrections to free surface:  1.2e-10
 
 # Solution summary:
 
@@ -23,8 +25,8 @@ Iteration  4: Mean of corrections to free surface:  6.5e-13
 
 # Solution by 8-term Fourier series
 
-# Height/Depth: 0.010,  17% of the maximum of H/d = 0.059 for this length:
-# Length/Depth:   0.42
+# Height/Depth: 0.050,  76% of the maximum of H/d = 0.066 for this length:
+# Length/Depth:   0.47
 # Dimensionless Period T*sqrt(g/d):   1.62
 # Current criterion: Euler,  Dimensionless value: 0.000
 
@@ -32,34 +34,34 @@ Touch key to continue
 
 
 Finished
-Max nNodes_subdomain 4996 nNodes_global 4996
+Max nNodes_subdomain 5108 nNodes_global 5108
 Done allocating MPIAdj
-Max memory usage per core 0.118915GB
+Max memory usage per core 0.126509GB
 Done applying partition
-Max memory usage per core 0.118936GB
+Max memory usage per core 0.126628GB
 ==================out of core old2new is correct!====================
 Done with masks
-Max memory usage per core 0.119914GB
+Max memory usage per core 0.127631GB
 Done marking elements
-Max memory usage per core 0.129618GB
+Max memory usage per core 0.137585GB
 Done allocating element numbering new2old/old2new
-Max memory usage per core 0.130105GB
+Max memory usage per core 0.138015GB
 Done reading element boundaries
-Max memory usage per core 0.134861GB
+Max memory usage per core 0.143045GB
 Allocating elementBoudnary old2new/new2old
-Max memory usage per core 0.13672GB
+Max memory usage per core 0.145019GB
 Done allocating elementBoudnary old2new/new2old
-Max memory usage per core 0.136974GB
+Max memory usage per core 0.145039GB
 Done reading edges
-Max memory usage per core 0.141836GB
+Max memory usage per core 0.149901GB
 Setting edgeNumering old2new/new2old
-Max memory usage per core 0.143553GB
+Max memory usage per core 0.151998GB
 Done allocating edgeNumering old2new/new2old
-Max memory usage per core 0.143811GB
+Max memory usage per core 0.152027GB
 Done reading vertices
-Max memory usage per core 0.144077GB
+Max memory usage per core 0.152293GB
 Done with material types
-Max memory usage per core 0.152588GB
+Max memory usage per core 0.161087GB
 Done with partitioning!
-Max memory usage per core 0.152883GB
-Tue Apr 11 16:53:36 CDT 2023
+Max memory usage per core 0.1613GB
+Thu Apr 13 10:27:37 CDT 2023
