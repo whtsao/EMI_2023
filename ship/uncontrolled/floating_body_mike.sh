@@ -8,7 +8,7 @@
 #SBATCH -A hpc_proteus02o
 #SBATCH -o o.out
 #SBATCH -e e.err
-#SBATCH -J emi2023_free_decay_ship
+#SBATCH -J emi2023_uncontrolled_ship_fr100
 #load proteus module and ensure proteus's python is in path
 
 date
@@ -23,9 +23,11 @@ export MV2_HOMOGENEOUS_CLUSTER=1
 
 mkdir -p $WORK/$SLURM_JOB_NAME.$SLURM_JOBID 
 cd $WORK/$SLURM_JOB_NAME.$SLURM_JOBID 
+#cp $SLURM_SUBMIT_DIR/petsc.options.superlu_dist .
+#cp $SLURM_SUBMIT_DIR/petsc.options.asm .
 cp $SLURM_SUBMIT_DIR/*.py .
 cp $SLURM_SUBMIT_DIR/*.sh .
 
-parun --TwoPhaseFlow pmtld.py -l 5 -C "he=0.5"
+parun --TwoPhaseFlow pmtld.py -F -l 5 -C "he=0.002 fr=1.0"
 
 exit 0

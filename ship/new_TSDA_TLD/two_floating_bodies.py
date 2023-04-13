@@ -54,7 +54,7 @@ opts= Context.Options([
     ("fny",0.6104,"Natural frequency of heave motion of the main structure"),
     ("fnz",0.6104,"Natural frequency of roll motion of the main structure"),
     ("mooring",False,"True if the mooring lines are attached"),
-    ("fill_water",False,"True if the mooring lines are attached"),
+    ("fill_water",False,"True if the attached tank is filled with water TLD is activated"),
     ("ic_angle",0.,"Initial pitch angle of the floating platform (deg)"),
     ])
 
@@ -227,8 +227,8 @@ boundaryTags = {'wall': 1}
 # barycenter
 arm = body_w1*body_h1*(body_h2+0.5*body_h1)+0.5*(body_w1+body_w2)*body_h2*(body_w2+2.*body_w1)*body_h2/(body_w1+body_w2)/3.
 area = body_w1*body_h1+0.5*(body_w1+body_w2)*body_h2
-gy = arm/area
-barycenter = np.array([0.5*body_w1, gy, 0.])
+gy1 = arm/area
+barycenter = np.array([0.5*body_w1, gy1, 0.])
 
 caisson1 = st.CustomShape(
     domain=domain,
@@ -288,8 +288,8 @@ boundaryTags2 = {'wall': 1}
 # barycenter
 arm = 2.*tld_t*tld_ly*0.5*tld_ly+tld_w*tld_t*0.5*tld_t
 area = tld_lx*tld_ly-tld_w*(tld_ly-tld_t)
-gy = arm/area
-barycenter2 = np.array([0.5*tld_lx, gy, 0.])
+gy2 = arm/area
+barycenter2 = np.array([0.5*tld_lx, gy2, 0.])
 
 caisson2 = st.CustomShape(
     domain=domain,
@@ -411,7 +411,6 @@ TSDA1.SetSpringCoefficient(ki)
 TSDA1.SetDampingCoefficient(ci)
 system.ChSystem.Add(TSDA1)
 
-
 # SPRING 2 (middle vertical)
 #TSDA2 = pychrono.ChLinkTSDA()
 #body1_point = pychrono.ChVectorD(0.5*water_length,water_level+body_h1+body_h2-yst,0.0)
@@ -439,6 +438,164 @@ TSDA3.Initialize(system.subcomponents[0].ChBody,
 TSDA3.SetSpringCoefficient(ki)
 TSDA3.SetDampingCoefficient(ci)
 system.ChSystem.Add(TSDA3)
+
+# MOORING
+
+if opts.moorings:
+    # variables
+    # length
+    L = (water_level**2+1.**2)**0.5 # m
+    # submerged weight
+    w = 0.0778  # kg/m
+    # equivalent diameter (chain -> cylinder)
+    d = 32.34e-3 # m
+    # unstretched cross-sectional area
+    A0 = (np.pi*d**2/4.)
+    # density
+    dens = w/A0+rho_0
+    # number of elements for cable
+    nb_elems = 20
+    # Young's modulus
+    #E = (753.6e6)/50**3/A0
+    E = 5.44e10
+
+    # fairleads coordinates
+    #fairlead_center = np.array([opts.Lx/2, opts.Ly/2, water_level - 0.045 + caisson_dim[2]/2])
+    #fairlead1 = fairlead_center+np.array([0., (caisson_dim[1] + caisson_dim[1]/2 + d_section_side), 0.])
+    #fairlead2 = fairlead_center+np.array([0., -(caisson_dim[1] + caisson_dim[1]/2 + d_section_side), 0.])
+    # anchors coordinates
+    anchor1 = np.array([0.5*water_length, water_level-yst+gy1, 0.])
+    anchor2 = np.array([0.5*water_length, 0., 0.])
+
+    # quasi-statics for finding shape of cable
+    from pycatenary.cable import MooringLine
+    # create lines
+    EA = E*A0
+    cat1 = MooringLine(L=L,
+                    w=w*9.81,
+                    EA=EA,
+                    anchor=anchor1,
+                    fairlead=fairlead1,
+                    nd=2,
+                    floor=True)
+    cat2 = MooringLine(L=L,
+                    w=w*9.81,
+                    EA=EA,
+                    anchor=anchor2,
+                    fairlead=fairlead2,
+                    nd=2,
+                    floor=True)
+    cat1.computeSolution()
+    cat2.computeSolution()
+
+    # ANCHOR1
+    # arbitrary body fixed in space
+    body1 = fsi.ProtChBody(o_chrono_system)
+    body1.barycenter0 = np.zeros(3)
+    # fix anchor in space
+    body1.ChBody.SetBodyFixed(True)
+
+    # ANCHOR2
+    # arbitrary body fixed in space
+    body2 = fsi.ProtChBody(o_chrono_system)
+    body2.barycenter0 = np.zeros(3)
+    # fix anchor in space
+    body2.ChBody.SetBodyFixed(True)
+
+    # MESH
+    # initialize mesh that will be used for cables
+    #mesh = fsi.ProtChMesh(o_chrono_system)
+
+    # FEM CABLES
+    # moorings line 1
+    #m1 = fsi.ProtChMoorings(system=o_chrono_system,
+    #                        mesh=mesh,
+    #                        length=np.array([L]),
+    #                        nb_elems=np.array([nb_elems]),
+    #                        d=np.array([d]),
+    #                        rho=np.array([dens]),
+    #                        E=np.array([E]))
+    #m1.setName(b'mooring1')
+    # send position functions from catenary to FEM cable
+    #m1.setNodesPositionFunction(cat1.s2xyz, cat1.ds2xyz)
+    # sets node positions of the cable
+    #m1.setNodesPosition()
+    # build cable
+    #m1.buildNodes()
+    # apply external forces
+    #m1.setApplyDrag(True)
+    #m1.setApplyBuoyancy(True)
+    #m1.setApplyAddedMass(True)
+    # set fluid density at cable nodes
+    #m1.setFluidDensityAtNodes(np.array([rho_0 for i in range(m1.nodes_nb)]))
+    # sets drag coefficients
+    #m1.setDragCoefficients(tangential=1.15, normal=0.213, segment_nb=0)
+    # sets added mass coefficients
+    #m1.setAddedMassCoefficients(tangential=0.269, normal=0.865, segment_nb=0)
+    # small Iyy for bending
+    #m1.setIyy(0., 0)
+    # attach back node of cable to body
+    #m1.attachBackNodeToBody(o_chrono_system.subcomponents[3]) #**********************************************
+    # attach front node to anchor
+    #m1.attachFrontNodeToBody(body1)
+
+    # mooring line 2
+    #m2 = fsi.ProtChMoorings(system=o_chrono_system,
+    #                        mesh=mesh,
+    #                        length=np.array([L]),
+    #                        nb_elems=np.array([nb_elems]),
+    #                        d=np.array([d]),
+    #                        rho=np.array([dens]),
+    #                        E=np.array([E]))
+    #m2.setName(b'mooring2')
+    # send position functions from catenary to FEM cable
+    #m2.setNodesPositionFunction(cat2.s2xyz, cat2.ds2xyz)
+    # sets node positions of the cable
+    #m2.setNodesPosition()
+    # build cable
+    #m2.buildNodes()
+    # apply external forces
+    #m2.setApplyDrag(True)
+    #m2.setApplyBuoyancy(True)
+    #m2.setApplyAddedMass(True)
+    # set fluid density at cable nodes
+    #m2.setFluidDensityAtNodes(np.array([rho_0 for i in range(m2.nodes_nb)]))
+    # sets drag coefficients
+    #m2.setDragCoefficients(tangential=1.15, normal=0.213, segment_nb=0)
+    # sets added mass coefficients
+    #m2.setAddedMassCoefficients(tangential=0.269, normal=0.865, segment_nb=0)
+    # small Iyy for bending
+    #m2.setIyy(0., 0)
+    # attach back node of cable to body
+    #m2.attachBackNodeToBody(o_chrono_system.subcomponents[4]) #**********************************************
+    # attach front node to anchor
+    #m2.attachFrontNodeToBody(body2)
+
+    # SEABED
+    # create a box
+    #seabed = pychrono.ChBodyEasyBox(100., 0.2, 1., 1000, True)
+    # move box
+    #seabed.SetPos(pychrono.ChVectorD(0., -0.1-d*2, 0.))
+    # fix boxed in space
+    #seabed.SetBodyFixed(True)
+    # add box to system
+    #o_chrono_system.ChSystem.Add(seabed)
+
+    # CONTACT MATERIAL
+    # define contact material for collision detection
+    material = pychrono.ChMaterialSurfaceSMC()
+    material.SetKn(3e6)  # normal stiffness
+    material.SetGn(1.)  # normal damping coefficient
+    material.SetFriction(0.3)
+    material.SetRestitution(0.2)
+    material.SetAdhesion(0)
+
+    # add material to objects
+    #seabed.SetMaterialSurface(material)
+    #m1.setContactMaterial(material)
+    #m2.setContactMaterial(material)
+
+
 
 
 #  ____                        _                   ____                _ _ _   _
@@ -543,7 +700,20 @@ class VF_IC_TLD:
         return smoothedHeaviside(smoothing, x[nd-1]-water_level)
 class PHI_IC_TLD:
     def uOfXT(self, x, t):
-        return x[nd-1] - water_level
+        phi_xl = x[0] -0.5*water_length-0.5*tld_w
+        phi_xr = x[0] +0.5*water_length+0.5*tld_w
+
+        phi_y = x[1] - water_level
+        if phi_x < 0.0:
+            if phi_y < 0.0:
+                return max(phi_x, phi_y)
+            else:
+                return phi_y
+        else:
+            if phi_y < 0.0:
+                return phi_x
+            else:
+                return (phi_x ** 2 + phi_y ** 2)**0.5
 
 
 if not fill_water: # empty TLD
