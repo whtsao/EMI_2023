@@ -54,7 +54,7 @@ opts= Context.Options([
     ("fny",0.6104,"Natural frequency of heave motion of the main structure"),
     ("fnz",0.6104,"Natural frequency of roll motion of the main structure"),
     ("mooring",False,"True if the mooring lines are attached"),
-    ("fill_water",False,"True if the attached tank is filled with water TLD is activated"),
+    ("fill_water",True,"True if the attached tank is filled with water TLD is activated"),
     ("ic_angle",0.,"Initial pitch angle of the floating platform (deg)"),
     ])
 
@@ -167,13 +167,13 @@ ic_angle = (opts.ic_angle/180.)*math.pi
 
 
 # TMD dimension, assume a rectangular box
-tld_w = 5.
-tld_h = 0.5 # this is water depth of the TLD
+tld_w = 5. # water width of TLD (tank inner width)
+tld_h = 0.5 # water depth of TLD
 
-tld_t = 0.2
-tld_lx = tld_w+2.*tld_t
-tld_ly = 3.*tld_h
-tld_tho = 200.
+tld_t = 0.2 # tank wall thickness
+tld_lx = tld_w+2.*tld_t # tank outer width
+tld_ly = 3.*tld_h # tank height
+tld_tho = 50.
 mw = rho_0*tld_h*tld_w
 
 # Design vertical spring based on TMD theory
@@ -441,7 +441,7 @@ system.ChSystem.Add(TSDA3)
 
 # MOORING
 
-if opts.moorings:
+if opts.mooring:
     # variables
     # length
     L = (water_level**2+1.**2)**0.5 # m
@@ -657,6 +657,8 @@ from proteus.ctransportCoefficients import smoothedHeaviside_integral
 smoothing = 1.5*he
 nd = domain.nd
 
+# INITIAL CONDITION WITHOUT WATER FILLED IN TLD
+
 class P_IC:
     def uOfXT(self, x, t):
         p_L = 0.0
@@ -685,6 +687,7 @@ class PHI_IC:
     def uOfXT(self, x, t):
         return x[nd-1] - water_level
 
+# INITIAL CONDITION WHEN WATER IS FILLED IN TLD
 
 class P_IC_TLD:
     def uOfXT(self, x, t):
@@ -695,25 +698,41 @@ class P_IC_TLD:
                           +(rho_1 -rho_0)*(smoothedHeaviside_integral(smoothing,phi_L)
                                                 -smoothedHeaviside_integral(smoothing,phi)))
         return p
+
 class VF_IC_TLD:
+#    def uOfXT(self, x, t):
+#        return smoothedHeaviside(smoothing, x[nd-1]-water_level)
+    def __init__(self):
+        self.phi = PHI_IC_TLD()
     def uOfXT(self, x, t):
-        return smoothedHeaviside(smoothing, x[nd-1]-water_level)
+        from proteus.ctransportCoefficients import smoothedHeaviside
+#        return smoothedHeaviside(1.5*opts.he,self.phi.uOfXT(x,0.0))
+        return smoothedHeaviside(smoothing,self.phi.uOfXT(x,0.0))
+
 class PHI_IC_TLD:
     def uOfXT(self, x, t):
-        phi_xl = x[0] -0.5*water_length-0.5*tld_w
-        phi_xr = x[0] +0.5*water_length+0.5*tld_w
+        # sdf of swl
+        phi1 = x[nd-1] - water_level
 
-        phi_y = x[1] - water_level
+        # sdf of water in TLD
+        xg = 0.5*water_length
+        yg = water_level+body_h1+body_h2-yst+spacing+tld_t+0.5*tld_h
+        x2 = [abs(x[nd-2] - xg), abs(x[nd-1] - yg)]
+        phi_x = x2[0] - 0.5*tld_w
+        phi_y = x2[1] - 0.5*tld_h
         if phi_x < 0.0:
             if phi_y < 0.0:
-                return max(phi_x, phi_y)
+                phi2 = max(phi_x, phi_y)
             else:
-                return phi_y
+                phi2 = phi_y
         else:
             if phi_y < 0.0:
-                return phi_x
+                phi2 = phi_x
             else:
-                return (phi_x ** 2 + phi_y ** 2)**0.5
+                phi2 = (phi_x ** 2 + phi_y ** 2)**0.5
+        
+        # sdf of entire flow field
+        return min(phi1,phi2)
 
 
 if not fill_water: # empty TLD
@@ -828,9 +847,16 @@ m['move'].p.initialConditions['hy'] = zero()
 m['flow'].p.initialConditions['p'] = zero()
 m['flow'].p.initialConditions['u'] = zero()
 m['flow'].p.initialConditions['v'] = zero()
-m['vof'].p.initialConditions['vof'] = VF_IC()
-m['ncls'].p.initialConditions['phi'] = PHI_IC()
-m['rdls'].p.initialConditions['phid'] = PHI_IC()
+if fill_water:
+    m['vof'].p.initialConditions['vof'] = VF_IC_TLD()
+    m['ncls'].p.initialConditions['phi'] = PHI_IC_TLD()
+    m['rdls'].p.initialConditions['phid'] = PHI_IC_TLD()
+else:
+    m['vof'].p.initialConditions['vof'] = VF_IC()
+    m['ncls'].p.initialConditions['phi'] = PHI_IC()
+    m['rdls'].p.initialConditions['phid'] = PHI_IC()
+
+
 m['mcorr'].p.initialConditions['phiCorr'] = zero()
 m['addedMass'].p.initialConditions['addedMass'] = zero()
 

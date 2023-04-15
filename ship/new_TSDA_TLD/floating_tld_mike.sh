@@ -27,6 +27,6 @@ cp $SLURM_SUBMIT_DIR/petsc.options.superlu_dist .
 cp $SLURM_SUBMIT_DIR/*.py .
 cp $SLURM_SUBMIT_DIR/*.sh .
 
-parun --TwoPhaseFlow two_floating_bodies.py -F -l 5 -C "he=0.5 fr=1."
+parun --TwoPhaseFlow two_floating_bodies.py -F -l 5 -C "he=0.2 fr=1."
 
 exit 0

@@ -25,7 +25,10 @@ mkdir -p $WORK/$SLURM_JOB_NAME.$SLURM_JOBID
 cd $WORK/$SLURM_JOB_NAME.$SLURM_JOBID 
 cp $SLURM_SUBMIT_DIR/*.py .
 cp $SLURM_SUBMIT_DIR/*.sh .
+cp $SLURM_SUBMIT_DIR/petsc.options.asm .
+cp $SLURM_SUBMIT_DIR/petsc.options.superlu_dist .
 
-parun --TwoPhaseFlow pmtld.py -l 5 -C "he=0.5"
+#parun --TwoPhaseFlow pmtld.py -l 5 -C "he=0.1" -O petsc.options.superlu_dist
+parun --TwoPhaseFlow pmtld.py -l 5 -C "he=0.1" -O petsc.options.asm
 
 exit 0
