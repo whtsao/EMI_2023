@@ -127,15 +127,12 @@ tank = st.Tank2D(domain, dim=(water_length, 2.*water_level))
 #tank = st.Tank2D(domain, dim=(2.*wavelength, 2.*water_level))
 
 # SPONGE LAYERS
-# generation zone: 1 wavelength
-# absorption zone: 2 wavelengths
 #tank.setSponge(x_n=2.)
 #tank.setSponge(x_n=wavelength, x_p=wavelength)
-#tank.setSponge(x_n=3., x_p=3.)
+tank.setSponge(x_n=10., x_p=10.)
 
 # FLOATING STRUCTURE (main structure)
 #caisson = st.Rectangle(domain, dim=(body_w, body_h), coords=(0., 0.))
-
 w05 = 0.5*(body_w1-body_w2)
 vertices = np.array([
     [w05,         0.], # 0
@@ -268,13 +265,18 @@ for tag, bc in caisson.BC.items():
 # TANK
 # atmosphere on top
 tank.BC['y+'].setAtmosphere()
+
 # free slip on bottom
 tank.BC['y-'].setFreeSlip()
+
 # free slip on the right
-tank.BC['x+'].setFreeSlip()
+#tank.BC['x+'].setFreeSlip()
+
+# free slip on the left
+#tank.BC['x-'].setFreeSlip()
+
 # non material boundaries for sponge interface
-tank.BC['x-'].setFreeSlip()
-#tank.BC['sponge'].setNonMaterial()
+tank.BC['sponge'].setNonMaterial()
 
 # fix in space nodes on the boundaries of the tank
 for tag, bc in tank.BC.items():
@@ -293,9 +295,13 @@ for tag, bc in tank.BC.items():
 #                        dragAlpha=dragAlpha)
 #tank.setAbsorptionZones(x_p=True,
 #                        dragAlpha=dragAlpha)
-#dragAlpha = 1.e+6
-#tank.setAbsorptionZones(x_p=True, x_n=True,
-#                        dragAlpha=dragAlpha)
+
+# ABSORPTION ON TWO SIDES
+dragAlpha = 1.e+6
+tank.setAbsorptionZones(x_p=True, x_n=True,
+                        dragAlpha=dragAlpha)
+
+
 
 #  ___       _ _   _       _    ____                _ _ _   _
 # |_ _|_ __ (_) |_(_) __ _| |  / ___|___  _ __   __| (_) |_(_) ___  _ __  ___
