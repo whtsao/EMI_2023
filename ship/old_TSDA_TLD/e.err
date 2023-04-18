@@ -1,0 +1,2 @@
+USER WARNING: In order to avoid a segmentation fault, you need to have supplied the 'f' flag to the triangleOptions input.
+USER WARNING: In order to avoid an edge assertion error, you need to have supplied the 'ee' flag to the triangleOptions input.

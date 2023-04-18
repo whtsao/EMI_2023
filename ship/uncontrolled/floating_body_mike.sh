@@ -2,7 +2,7 @@
 ##SBATCH -N 4
 ##SBATCH -n 256
 #SBATCH -N 1
-#SBATCH -n 64
+#SBATCH -n 16
 #SBATCH -t 00:10:00
 #SBATCH -p workq
 #SBATCH -A hpc_proteus02o
@@ -28,6 +28,6 @@ cd $WORK/$SLURM_JOB_NAME.$SLURM_JOBID
 cp $SLURM_SUBMIT_DIR/*.py .
 cp $SLURM_SUBMIT_DIR/*.sh .
 
-parun --TwoPhaseFlow pmtld.py -F -l 5 -C "he=0.002 fr=1.0"
+parun --TwoPhaseFlow pmtld.py -F -l 5 -C "he=0.5 fr=1.0"
 
 exit 0

@@ -184,8 +184,8 @@ xi_opt = (3.*rm/8./(1.+rm))**0.5
 keq = (mw+mb2)*(2.*np.pi*fny*ft)**2
 ceq = 2.*(mw+mb2)*(2.*np.pi*fny*ft)
 cosa = spacing**2/(spacing**2+(0.5*tld_lx+0.5*body_w1)**2) # square of cosine angle of spring and dashpot
-ki = keq/2./cosa
-ci = ceq/2./cosa
+ki = keq/2./cosa*100000000.
+ci = ceq/2./cosa*0.
 
 # TANK
 #tank = st.Tank2D(domain, dim=(2*wavelength, 2*water_level))
