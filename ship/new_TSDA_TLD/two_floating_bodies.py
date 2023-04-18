@@ -53,7 +53,7 @@ opts= Context.Options([
     ("fnx",0.6104,"Natural frequency of sway motion of the main structure"),
     ("fny",0.6104,"Natural frequency of heave motion of the main structure"),
     ("fnz",0.6104,"Natural frequency of roll motion of the main structure"),
-    ("mooring",False,"True if the mooring lines are attached"),
+    ("mooring",True,"True if the mooring lines are attached"),
     ("fill_water",True,"True if the attached tank is filled with water TLD is activated"),
     ("ic_angle",0.,"Initial pitch angle of the floating platform (deg)"),
     ])
@@ -462,47 +462,30 @@ if opts.mooring:
     E = 1.e8 #5.44e10
 
     # fairleads coordinates
-    #fairlead_center = np.array([opts.Lx/2, opts.Ly/2, water_level - 0.045 + caisson_dim[2]/2])
-    #fairlead1 = fairlead_center+np.array([0., (caisson_dim[1] + caisson_dim[1]/2 + d_section_side), 0.])
-    #fairlead2 = fairlead_center+np.array([0., -(caisson_dim[1] + caisson_dim[1]/2 + d_section_side), 0.])
+    fairlead = np.array([0.5*water_length, yg0, 0.])
     # anchors coordinates
-    anchor1 = np.array([0.5*water_length, yg0, 0.])
-    anchor2 = np.array([0.5*water_length, 0., 0.])
+    anchor = np.array([0.5*water_length, 0., 0.])
 
     # quasi-statics for finding shape of cable
     from pycatenary.cable import MooringLine
     # create lines
     EA = E*A0
-    cat1 = MooringLine(L=L,
+    cat = MooringLine(L=L,
                     w=w*9.81,
                     EA=EA,
-                    anchor=anchor1,
-                    fairlead=fairlead1,
+                    anchor=anchor,
+                    fairlead=fairlead,
                     nd=2,
                     floor=True)
-    cat2 = MooringLine(L=L,
-                    w=w*9.81,
-                    EA=EA,
-                    anchor=anchor2,
-                    fairlead=fairlead2,
-                    nd=2,
-                    floor=True)
-    cat1.computeSolution()
-    cat2.computeSolution()
 
-    # ANCHOR1
-    # arbitrary body fixed in space
-    body1 = fsi.ProtChBody(o_chrono_system)
-    body1.barycenter0 = np.zeros(3)
-    # fix anchor in space
-    body1.ChBody.SetBodyFixed(True)
+    cat.computeSolution()
 
-    # ANCHOR2
+    # ANCHOR
     # arbitrary body fixed in space
-    body2 = fsi.ProtChBody(o_chrono_system)
-    body2.barycenter0 = np.zeros(3)
+    #body1 = fsi.ProtChBody(o_chrono_system)
+    #body1.barycenter0 = np.zeros(3)
     # fix anchor in space
-    body2.ChBody.SetBodyFixed(True)
+    #body1.ChBody.SetBodyFixed(True)
 
     # MESH
     # initialize mesh that will be used for cables
