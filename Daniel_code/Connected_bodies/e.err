@@ -1,0 +1,11 @@
+Autoloading mvapich2/2.3.3/gcc-9.3.0
+
+Loading proteus/1.8.1/gcc-9.3.0-mvapich2-2.3.3
+  Loading requirement: gcc/9.3.0 mvapich2/2.3.3/gcc-9.3.0
+WARNING: Error in initializing MVAPICH2 ptmalloc library.Continuing without InfiniBand registration cache support.
+
+real	4m36.984s
+user	4m33.217s
+sys	0m2.435s
+USER WARNING: In order to avoid a segmentation fault, you need to have supplied the 'f' flag to the triangleOptions input.
+USER WARNING: In order to avoid an edge assertion error, you need to have supplied the 'ee' flag to the triangleOptions input.

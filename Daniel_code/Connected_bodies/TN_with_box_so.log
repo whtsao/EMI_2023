@@ -1,0 +1,105 @@
+[       0] Initializing Proteus
+[       0] Initializing MPI
+[       0] Adding . to path for loading modules
+[       0] Loading problem-specific modules
+[       0] Importing input modules
+[       0] Loading so module = TN_with_box_so.py
+[       0] Context input options:
+T[40.0] Final time for simulation
+
+dt_init[0.001] initial time for simulation
+
+dt_fixed[None] Fixed (maximum) time step
+
+nsave[2] number of timesteps saved per second
+
+timeIntegration[backwardEuler] Time integration scheme (backwardEuler/VBDF)
+
+cfl[0.25] Desired CFL restriction
+
+he[1.0] he relative to Length of domain in x
+
+d_interface_he[4.5] refinement factore for a-w interface
+
+free_slip[True] set boundaries to free slip
+
+Lz[13.058] Dimensions in Z direction [m]
+
+water_level[6.096] water level [m]
+
+wave_length[15.02] wavelength [m]
+
+chrono_dt[0.0001] water level [m]
+
+waves[True] Enable waves [True/False]
+
+wind_speed[-7.72] None or np.array([value, value, value]) for speed of wind
+
+wave_height[1.14] Height of waves, meters
+
+period[3.75] Wave period, seconds
+
+absorption_zones[False] Enable abs zones [True/False]
+
+abs_zone_length[25.0] Length of the absorption zones of the domain
+
+springStiffness[0.0] Spring constant, k: F=-kx
+
+deform_x[0.0] Initial deformation of the spring in the x-direction
+
+deform_y[0.0] Intial deformation of the springin the y-direction
+
+box_number[3] number of boxes
+
+width_multiplier[3] width of the domain is the width_multiplier*box_width
+
+Lz[13.058] Height of domain [m]
+
+moorings[False] Option to enable moorings
+
+
+[       0] Processing context input options from commandline
+[       0] he = 1.
+[       0] Processing context input options from commandline
+[       0] T = 1.
+[       1] Key RelaxZones is already attached.
+[       1] WARNING: Dirichlet condition for k in Atmosphere has not been set. Ignore if RANS is not used
+[       1] WARNING: Dirichlet condition for dissipation in Atmosphere has not been set. Ignore if RANS is not used
+[       1] Loading p module = moveMesh_p
+[       1] Loading n module = moveMesh_n
+[       1] Loading p module = twp_navier_stokes_p
+[       1] Loading n module = twp_navier_stokes_n
+[       1] RANS2P.SubgridError: lagging requested but must lag the first step; switching lagging off and delaying
+[       1] RANS2P.ShockCapturing: lagging requested but must lag the first step; switching lagging off and delaying
+[       1] Loading p module = vof_with_box_p
+[       1] Loading n module = vof_n
+[       1] VOF.ShockCapturing: lagging requested but must lag the first step; switching lagging off and delaying
+[       1] Loading p module = ls_with_box_p
+[       2] Loading n module = ls_n
+[       2] NCLS.ShockCapturing: lagging requested but must lag the first step; switching lagging off and delaying
+[       2] Loading p module = redist_p
+[       2] Loading n module = redist_n
+[       2] Loading p module = ls_consrv_p
+[       2] Loading n module = ls_consrv_n
+[       2] Loading p module = added_mass_p
+[       2] Loading n module = added_mass_n
+[       2] Attaching input stream to stdin
+[       2] Running Proteus version 1.8.1
+[       2] Setting simulation processing defaults
+[       2] Starting TN_with_box run number 0
+[       2] Initializing NumericalSolution for TN_with_box
+ System includes: 
+moveMesh_p
+twp_navier_stokes_p
+vof_with_box_p
+ls_with_box_p
+redist_p
+ls_consrv_p
+added_mass
+
+[       2] Setting Archiver(s)
+[       2] Setting up MultilevelMesh
+[       2] Building one multilevel mesh for all models
+[       2] Generating mesh for moveMesh_p
+[       2] Running gmsh to generate 3D mesh for PLCDomain
+[       2] Calling gmsh on rank 0 with command time gmsh mesh_test.geo -v 10 -3 -o mesh_test.msh -format msh2

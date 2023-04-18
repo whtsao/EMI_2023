@@ -3,7 +3,7 @@
 ##SBATCH -n 256
 #SBATCH -N 1
 #SBATCH -n 64
-#SBATCH -t 00:10:00
+#SBATCH -t 00:30:00
 #SBATCH -p workq
 #SBATCH -A hpc_proteus02o
 #SBATCH -o o.out
@@ -27,6 +27,6 @@ cp $SLURM_SUBMIT_DIR/petsc.options.superlu_dist .
 cp $SLURM_SUBMIT_DIR/*.py .
 cp $SLURM_SUBMIT_DIR/*.sh .
 
-parun --TwoPhaseFlow two_floating_bodies.py -F -l 5 -C "he=0.5 fr=1."
+parun --TwoPhaseFlow two_floating_bodies.py -F -l 5 -C "he=0.2 fr=1."
 
 exit 0
