@@ -2,8 +2,8 @@
 ##SBATCH -N 4
 ##SBATCH -n 256
 #SBATCH -N 1
-#SBATCH -n 64
-#SBATCH -t 12:00:00
+#SBATCH -n 16
+#SBATCH -t 72:00:00
 #SBATCH -p workq
 #SBATCH -A hpc_proteus02o
 #SBATCH -o o.out

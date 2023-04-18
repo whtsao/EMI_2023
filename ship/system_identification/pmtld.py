@@ -13,7 +13,7 @@ import pychrono
 # general options
 
 opts= Context.Options([
-    ("T",30.0,"Final time for simulation"),
+    ("T",100.0,"Final time for simulation"),
     ("dt_output",0.1,"Time interval to output solution"),
     ("cfl",0.5,"Desired CFL restriction"),
     ("he",0.01,"he relative to Length of domain in x"),
@@ -22,7 +22,7 @@ opts= Context.Options([
     ("fny",0.6104,"Natural frequency of heave motion"),
     ("fnz",0.6104,"Natural frequency of roll motion"),
     ("mooring",False,"True if the mooring lines are attached"),
-    ("ic_angle",0.,"Initial pitch angle of the floating platform (deg)"),
+    ("ic_angle",5.,"Initial pitch angle of the floating platform (deg)"),
     ])
 
 T = opts.T
@@ -129,7 +129,7 @@ tank = st.Tank2D(domain, dim=(water_length, 2.*water_level))
 # SPONGE LAYERS
 #tank.setSponge(x_n=2.)
 #tank.setSponge(x_n=wavelength, x_p=wavelength)
-tank.setSponge(x_n=10., x_p=10.)
+#tank.setSponge(x_n=10., x_p=10.)
 
 # FLOATING STRUCTURE (main structure)
 #caisson = st.Rectangle(domain, dim=(body_w, body_h), coords=(0., 0.))
@@ -236,9 +236,7 @@ body.setConstraints(free_x=free_x, free_r=free_r)
 
 # set main structure density, mass, and moment of inertia
 body.setMass(mb)
-
 mbi = 0.8*mb*(body_w1**2+(body_h1+body_h2)**2)/12. # very rough estimation
-
 body.setInertiaXX(np.array([1., 1., mbi]))
 
 # set inertia
@@ -270,13 +268,13 @@ tank.BC['y+'].setAtmosphere()
 tank.BC['y-'].setFreeSlip()
 
 # free slip on the right
-#tank.BC['x+'].setFreeSlip()
+tank.BC['x+'].setFreeSlip()
 
 # free slip on the left
-#tank.BC['x-'].setFreeSlip()
+tank.BC['x-'].setFreeSlip()
 
 # non material boundaries for sponge interface
-tank.BC['sponge'].setNonMaterial()
+#tank.BC['sponge'].setNonMaterial()
 
 # fix in space nodes on the boundaries of the tank
 for tag, bc in tank.BC.items():
@@ -297,10 +295,9 @@ for tag, bc in tank.BC.items():
 #                        dragAlpha=dragAlpha)
 
 # ABSORPTION ON TWO SIDES
-dragAlpha = 1.e+6
-tank.setAbsorptionZones(x_p=True, x_n=True,
-                        dragAlpha=dragAlpha)
-
+#dragAlpha = 1.e+6
+#tank.setAbsorptionZones(x_p=True, x_n=True,
+#                        dragAlpha=dragAlpha)
 
 
 #  ___       _ _   _       _    ____                _ _ _   _

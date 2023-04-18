@@ -179,7 +179,7 @@ mw = rho_0*tld_h*tld_w
 # Design vertical spring based on TMD theory
 mb2 = tld_tho*(tld_lx*tld_ly-(tld_ly-tld_t)*tld_w)
 rm = (mw+mb2)/mb1
-ft = 1./(1.+rm)
+ft = 1./(1.+rm) # design by Den Hartog's equation
 xi_opt = (3.*rm/8./(1.+rm))**0.5
 keq = (mw+mb2)*(2.*np.pi*fny*ft)**2
 ceq = 2.*(mw+mb2)*(2.*np.pi*fny*ft)
@@ -252,7 +252,9 @@ caisson1 = st.CustomShape(
 caisson1.holes_ind = np.array([0])
 tank.setChildShape(caisson1, 0)
 # translate caisson to middle of the tank
-caisson1.translate(np.array([0.5*water_length-0.5*body_w1, water_level-yst])) # initial motion is getting down
+y0 = water_level-yst
+yg0 = y0+gy1
+caisson1.translate(np.array([0.5*water_length-0.5*body_w1, y0]))
 #caisson1.rotate(rot = ic_angle)
 
 
@@ -444,7 +446,7 @@ system.ChSystem.Add(TSDA3)
 if opts.mooring:
     # variables
     # length
-    L = (water_level**2+1.**2)**0.5 # m
+    L = yg0 # m
     # submerged weight
     w = 0.0778  # kg/m
     # equivalent diameter (chain -> cylinder)
@@ -454,17 +456,17 @@ if opts.mooring:
     # density
     dens = w/A0+rho_0
     # number of elements for cable
-    nb_elems = 20
+    nb_elems = 40
     # Young's modulus
     #E = (753.6e6)/50**3/A0
-    E = 5.44e10
+    E = 1.e8 #5.44e10
 
     # fairleads coordinates
     #fairlead_center = np.array([opts.Lx/2, opts.Ly/2, water_level - 0.045 + caisson_dim[2]/2])
     #fairlead1 = fairlead_center+np.array([0., (caisson_dim[1] + caisson_dim[1]/2 + d_section_side), 0.])
     #fairlead2 = fairlead_center+np.array([0., -(caisson_dim[1] + caisson_dim[1]/2 + d_section_side), 0.])
     # anchors coordinates
-    anchor1 = np.array([0.5*water_length, water_level-yst+gy1, 0.])
+    anchor1 = np.array([0.5*water_length, yg0, 0.])
     anchor2 = np.array([0.5*water_length, 0., 0.])
 
     # quasi-statics for finding shape of cable

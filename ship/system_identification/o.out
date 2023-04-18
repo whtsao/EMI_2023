@@ -1,5 +1,8 @@
-Sat Apr 15 17:50:54 CDT 2023
+Mon Apr 17 07:48:26 CDT 2023
 Autoloading gcc/11.2.0
 
 Loading proteus/fct/gcc-11.2.0
   Loading requirement: gcc/11.2.0
+** PETSc DEPRECATION WARNING ** : the option -pc_factor_mat_solver_package is deprecated as of version 3.9 and will be removed in a future release. Please use the option -pc_factor_mat_solver_type instead. (Silence this warning with -options_suppress_deprecated_warnings)
+** PETSc DEPRECATION WARNING ** : the option -pc_factor_mat_solver_package is deprecated as of version 3.9 and will be removed in a future release. Please use the option -pc_factor_mat_solver_type instead. (Silence this warning with -options_suppress_deprecated_warnings)
+** PETSc DEPRECATION WARNING ** : the option -pc_factor_mat_solver_package is deprecated as of version 3.9 and will be removed in a future release. Please use the option -pc_factor_mat_solver_type instead. (Silence this warning with -options_suppress_deprecated_warnings)
