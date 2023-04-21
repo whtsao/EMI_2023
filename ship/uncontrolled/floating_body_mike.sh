@@ -3,7 +3,7 @@
 ##SBATCH -n 256
 #SBATCH -N 1
 #SBATCH -n 16
-#SBATCH -t 00:10:00
+#SBATCH -t 01:00:00
 #SBATCH -p workq
 #SBATCH -A hpc_proteus02o
 #SBATCH -o o.out

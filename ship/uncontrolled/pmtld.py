@@ -182,7 +182,9 @@ caisson = st.CustomShape(
 caisson.holes_ind = np.array([0])
 tank.setChildShape(caisson, 0)
 # translate caisson to middle of the tank
-caisson.translate(np.array([0.5*water_length-0.5*body_w1, water_level-0.8*yst])) # initial motion is getting down
+y0 = water_level-yst
+yg0 = y0+gy
+caisson.translate(np.array([0.5*water_length-0.5*body_w1, y0])) # initial motion is getting down
 caisson.rotate(rot = ic_angle)
 
 #   ____ _
@@ -232,9 +234,7 @@ body.setConstraints(free_x=free_x, free_r=free_r)
 
 # set main structure density, mass, and moment of inertia
 body.setMass(mb)
-
 mbi = 0.8*mb*(body_w1**2+(body_h1+body_h2)**2)/12. # very rough estimation
-
 body.setInertiaXX(np.array([1., 1., mbi]))
 
 # set inertia
@@ -245,16 +245,16 @@ body.setInertiaXX(np.array([1., 1., mbi]))
 # record values
 body.setRecordValues(all_values=True)
 
-# MOORING
+# MOORINGS
 
 if opts.mooring:
     # variables
     # length
-    L = yg0 # m
+    L = 0.5*(((y0+0.5*yst)**2+1.)**0.5+y0+0.5*yst+1.) #yg0 # m
     # submerged weight
     w = 0.0778  # kg/m
     # equivalent diameter (chain -> cylinder)
-    d = 32.34e-3 # m
+    d = 2.5e-3 # m
     # unstretched cross-sectional area
     A0 = (np.pi*d**2/4.)
     # density
@@ -262,103 +262,115 @@ if opts.mooring:
     # number of elements for cable
     nb_elems = 40
     # Young's modulus
+    E = (1.e10)/50**3/A0
     #E = (753.6e6)/50**3/A0
-    E = 1.e8 #5.44e10
+    #E = 1.e8 #5.44e10
 
     # fairleads coordinates
-    fairlead = np.array([0.5*water_length, yg0, 0.])
+    fairlead = np.array([0.5*water_length, y0+0.5*yst, 0.])
+
     # anchors coordinates
-    anchor = np.array([0.5*water_length, 0., 0.])
+    anchor1 = np.array([fairlead[0]-1., 0., 0.])
+    anchor2 = np.array([fairlead[0]+1., 0., 0.])
 
     # quasi-statics for finding shape of cable
     from pycatenary.cable import MooringLine
     # create lines
     EA = E*A0
-    cat = MooringLine(L=L,
+    cat1 = MooringLine(L=L,
                     w=w*9.81,
                     EA=EA,
-                    anchor=anchor,
+                    anchor=anchor1,
+                    fairlead=fairlead,
+                    nd=2,
+                    floor=True)
+    
+    cat2 = MooringLine(L=L,
+                    w=w*9.81,
+                    EA=EA,
+                    anchor=anchor2,
                     fairlead=fairlead,
                     nd=2,
                     floor=True)
 
-    cat.computeSolution()
+    cat1.computeSolution()
+    cat2.computeSolution()
 
     # ANCHOR
     # arbitrary body fixed in space
-    #body1 = fsi.ProtChBody(o_chrono_system)
-    #body1.barycenter0 = np.zeros(3)
+    body1 = fsi.ProtChBody(system)
+    body1.barycenter0 = np.zeros(3)
     # fix anchor in space
-    #body1.ChBody.SetBodyFixed(True)
+    body1.ChBody.SetBodyFixed(True)
 
     # MESH
     # initialize mesh that will be used for cables
-    #mesh = fsi.ProtChMesh(o_chrono_system)
+    mesh = fsi.ProtChMesh(system)
 
     # FEM CABLES
     # moorings line 1
-    #m1 = fsi.ProtChMoorings(system=o_chrono_system,
-    #                        mesh=mesh,
-    #                        length=np.array([L]),
-    #                        nb_elems=np.array([nb_elems]),
-    #                        d=np.array([d]),
-    #                        rho=np.array([dens]),
-    #                        E=np.array([E]))
-    #m1.setName(b'mooring1')
+    m1 = fsi.ProtChMoorings(system=system,
+                            mesh=mesh,
+                            length=np.array([L]),
+                            nb_elems=np.array([nb_elems]),
+                            d=np.array([d]),
+                            rho=np.array([dens]),
+                            E=np.array([E]))
+    m1.setName(b'mooring1')
     # send position functions from catenary to FEM cable
-    #m1.setNodesPositionFunction(cat1.s2xyz, cat1.ds2xyz)
+    m1.setNodesPositionFunction(cat1.s2xyz, cat1.ds2xyz)
     # sets node positions of the cable
-    #m1.setNodesPosition()
+    m1.setNodesPosition()
     # build cable
-    #m1.buildNodes()
+    m1.buildNodes()
     # apply external forces
-    #m1.setApplyDrag(True)
-    #m1.setApplyBuoyancy(True)
-    #m1.setApplyAddedMass(True)
+    m1.setApplyDrag(True)
+    m1.setApplyBuoyancy(True)
+    m1.setApplyAddedMass(True)
     # set fluid density at cable nodes
-    #m1.setFluidDensityAtNodes(np.array([rho_0 for i in range(m1.nodes_nb)]))
+    m1.setFluidDensityAtNodes(np.array([rho_0 for i in range(m1.nodes_nb)]))
     # sets drag coefficients
-    #m1.setDragCoefficients(tangential=1.15, normal=0.213, segment_nb=0)
+    m1.setDragCoefficients(tangential=1.15, normal=0.213, segment_nb=0)
     # sets added mass coefficients
-    #m1.setAddedMassCoefficients(tangential=0.269, normal=0.865, segment_nb=0)
+    m1.setAddedMassCoefficients(tangential=0.269, normal=0.865, segment_nb=0)
     # small Iyy for bending
-    #m1.setIyy(0., 0)
+    m1.setIyy(0., 0)
     # attach back node of cable to body
-    #m1.attachBackNodeToBody(o_chrono_system.subcomponents[3]) #**********************************************
+    m1.attachBackNodeToBody(body)
     # attach front node to anchor
-    #m1.attachFrontNodeToBody(body1)
+    m1.attachFrontNodeToBody(body1)
 
     # mooring line 2
-    #m2 = fsi.ProtChMoorings(system=o_chrono_system,
-    #                        mesh=mesh,
-    #                        length=np.array([L]),
-    #                        nb_elems=np.array([nb_elems]),
-    #                        d=np.array([d]),
-    #                        rho=np.array([dens]),
-    #                        E=np.array([E]))
-    #m2.setName(b'mooring2')
+    m2 = fsi.ProtChMoorings(system=system,
+                            mesh=mesh,
+                            length=np.array([L]),
+                            nb_elems=np.array([nb_elems]),
+                            d=np.array([d]),
+                            rho=np.array([dens]),
+                            E=np.array([E]))
+    m2.setName(b'mooring2')
     # send position functions from catenary to FEM cable
-    #m2.setNodesPositionFunction(cat2.s2xyz, cat2.ds2xyz)
+    m2.setNodesPositionFunction(cat2.s2xyz, cat2.ds2xyz)
     # sets node positions of the cable
-    #m2.setNodesPosition()
+    m2.setNodesPosition()
     # build cable
-    #m2.buildNodes()
+    m2.buildNodes()
     # apply external forces
-    #m2.setApplyDrag(True)
-    #m2.setApplyBuoyancy(True)
-    #m2.setApplyAddedMass(True)
+    m2.setApplyDrag(True)
+    m2.setApplyBuoyancy(True)
+    m2.setApplyAddedMass(True)
     # set fluid density at cable nodes
-    #m2.setFluidDensityAtNodes(np.array([rho_0 for i in range(m2.nodes_nb)]))
+    m2.setFluidDensityAtNodes(np.array([rho_0 for i in range(m2.nodes_nb)]))
     # sets drag coefficients
-    #m2.setDragCoefficients(tangential=1.15, normal=0.213, segment_nb=0)
+    m2.setDragCoefficients(tangential=1.15, normal=0.213, segment_nb=0)
     # sets added mass coefficients
-    #m2.setAddedMassCoefficients(tangential=0.269, normal=0.865, segment_nb=0)
+    m2.setAddedMassCoefficients(tangential=0.269, normal=0.865, segment_nb=0)
     # small Iyy for bending
-    #m2.setIyy(0., 0)
+    m2.setIyy(0., 0)
     # attach back node of cable to body
-    #m2.attachBackNodeToBody(o_chrono_system.subcomponents[4]) #**********************************************
+    m2.attachBackNodeToBody(body)
     # attach front node to anchor
-    #m2.attachFrontNodeToBody(body2)
+    m2.attachFrontNodeToBody(body1)
 
     # SEABED
     # create a box
@@ -368,16 +380,16 @@ if opts.mooring:
     # fix boxed in space
     #seabed.SetBodyFixed(True)
     # add box to system
-    #o_chrono_system.ChSystem.Add(seabed)
+    #system.ChSystem.Add(seabed)
 
     # CONTACT MATERIAL
     # define contact material for collision detection
-    material = pychrono.ChMaterialSurfaceSMC()
-    material.SetKn(3e6)  # normal stiffness
-    material.SetGn(1.)  # normal damping coefficient
-    material.SetFriction(0.3)
-    material.SetRestitution(0.2)
-    material.SetAdhesion(0)
+    #material = pychrono.ChMaterialSurfaceSMC()
+    #material.SetKn(3e6)  # normal stiffness
+    #material.SetGn(1.)  # normal damping coefficient
+    #material.SetFriction(0.3)
+    #material.SetRestitution(0.2)
+    #material.SetAdhesion(0)
 
     # add material to objects
     #seabed.SetMaterialSurface(material)
