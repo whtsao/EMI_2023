@@ -44,7 +44,7 @@ import pychrono
 #        return d_force
 
 opts= Context.Options([
-    ("final_time",60.0,"Final time for simulation"),
+    ("final_time",100.0,"Final time for simulation"),
     ("dt_output",0.1,"Time interval to output solution"),
     ("cfl",0.5,"Desired CFL restriction"),
     ("he",0.05,"he relative to Length of domain in x"),
@@ -54,6 +54,7 @@ opts= Context.Options([
     ("fny",0.3662,"Natural frequency of heave motion of the main structure"),
     ("fnz",0.3662,"Natural frequency of roll motion of the main structure"),
     ("mooring",True,"True if the mooring lines are attached"),
+    ("collision",False,"True if the mooring lines is collision body"),
     ("fill_water",True,"True if the attached tank is filled with water TLD is activated"),
     ("ic_angle",0.,"Initial pitch angle of the floating platform (deg)"),
     ])
@@ -139,7 +140,6 @@ domain = Domain.PlanarStraightLineGraphDomain()
 # Space between TLD and main structure
 spacing = 1.
 
-
 # Main structure dimensions
 body_w1 = 8.
 body_w2 = 1.
@@ -184,7 +184,8 @@ xi_opt = (3.*rm/8./(1.+rm))**0.5
 keq = (mw+mb2)*(2.*np.pi*fny*ft)**2
 ceq = 2.*(mw+mb2)*(2.*np.pi*fny*ft)
 cosa = spacing**2/(spacing**2+(0.5*tld_lx+0.5*body_w1)**2) # square of cosine angle of spring and dashpot
-ki = keq/2./cosa
+ki = keq/2./cosa*20. # plan B to get a stable result, but is useless for vibration control
+#ki = keq/2./cosa
 ci = ceq/2./cosa
 
 # TANK
@@ -445,8 +446,11 @@ system.ChSystem.Add(TSDA3)
 
 if opts.mooring:
     # variables
+    lx = 2.
     # length
-    L = 0.5*(((y0+0.5*yst)**2+1.)**0.5+y0+0.5*yst+1.) #yg0 # m
+    lmax = lx+y0+body_h2
+    lmin = (lx**2+(y0+body_w2)**2)**0.5
+    L = 0.5*(lmax+lmin) # m
     # submerged weight
     w = 0.0778  # kg/m
     # equivalent diameter (chain -> cylinder)
@@ -456,18 +460,22 @@ if opts.mooring:
     # density
     dens = w/A0+rho_0
     # number of elements for cable
-    nb_elems = 40
+    nb_elems = 50
     # Young's modulus
     E = (1.e10)/50**3/A0
     #E = (753.6e6)/50**3/A0
     #E = 1.e8 #5.44e10
 
     # fairleads coordinates
-    fairlead = np.array([0.5*water_length, y0+0.5*yst, 0.])
+    #fairlead = np.array([0.5*water_length, y0+0.5*yst, 0.])
+    fairlead1 = np.array([0.5*water_length-0.5*body_w1, y0+body_h2, 0.])
+    fairlead2 = np.array([0.5*water_length+0.5*body_w1, y0+body_h2, 0.])
 
     # anchors coordinates
-    anchor1 = np.array([fairlead[0]-1., 0., 0.])
-    anchor2 = np.array([fairlead[0]+1., 0., 0.])
+    #anchor1 = np.array([fairlead[0]-lx, 0., 0.])
+    #anchor2 = np.array([fairlead[0]+lx, 0., 0.])
+    anchor1 = np.array([fairlead1[0]-lx, 0., 0.])
+    anchor2 = np.array([fairlead2[0]+lx, 0., 0.])
 
     # quasi-statics for finding shape of cable
     from pycatenary.cable import MooringLine
@@ -477,7 +485,7 @@ if opts.mooring:
                     w=w*9.81,
                     EA=EA,
                     anchor=anchor1,
-                    fairlead=fairlead,
+                    fairlead=fairlead1,
                     nd=2,
                     floor=True)
     
@@ -485,7 +493,7 @@ if opts.mooring:
                     w=w*9.81,
                     EA=EA,
                     anchor=anchor2,
-                    fairlead=fairlead,
+                    fairlead=fairlead2,
                     nd=2,
                     floor=True)
 
@@ -495,9 +503,15 @@ if opts.mooring:
     # ANCHOR
     # arbitrary body fixed in space
     body1 = fsi.ProtChBody(system)
-    body1.barycenter0 = np.zeros(3)
+    body1.barycenter0 = anchor1 #np.zeros(3)
     # fix anchor in space
     body1.ChBody.SetBodyFixed(True)
+
+    # arbitrary body fixed in space
+    body2 = fsi.ProtChBody(system)
+    body2.barycenter0 = anchor2 #np.zeros(3)
+    # fix anchor in space
+    body2.ChBody.SetBodyFixed(True)
 
     # MESH
     # initialize mesh that will be used for cables
@@ -566,32 +580,33 @@ if opts.mooring:
     # attach back node of cable to body
     m2.attachBackNodeToBody(body)
     # attach front node to anchor
-    m2.attachFrontNodeToBody(body1)
+    m2.attachFrontNodeToBody(body2)
 
-    # SEABED
-    # create a box
-    #seabed = pychrono.ChBodyEasyBox(100., 0.2, 1., 1000, True)
-    # move box
-    #seabed.SetPos(pychrono.ChVectorD(0., -0.1-d*2, 0.))
-    # fix boxed in space
-    #seabed.SetBodyFixed(True)
-    # add box to system
-    #system.ChSystem.Add(seabed)
+    if opts.collision:
+        # CONTACT MATERIAL
+        # define contact material for collision detection
+        material = pychrono.ChMaterialSurfaceSMC()
+        material.SetKn(3e6)  # normal stiffness
+        material.SetGn(1.)  # normal damping coefficient
+        material.SetFriction(0.3)
+        material.SetRestitution(0.2)
+        material.SetAdhesion(0)
 
-    # CONTACT MATERIAL
-    # define contact material for collision detection
-    #material = pychrono.ChMaterialSurfaceSMC()
-    #material.SetKn(3e6)  # normal stiffness
-    #material.SetGn(1.)  # normal damping coefficient
-    #material.SetFriction(0.3)
-    #material.SetRestitution(0.2)
-    #material.SetAdhesion(0)
+        # SEABED
+        # create a box
+        #seabed = pychrono.ChBodyEasyBox(100., 0.2, 1., 1000, True)
+        seabed = pychrono.ChBodyEasyBox(100., 0.2, 1., 1000, True, True, material)
+        # move box
+        seabed.SetPos(pychrono.ChVectorD(0., -0.1-2.*d, 0.))
+        # fix boxed in space
+        seabed.SetBodyFixed(True)
+        # add box to system
+        system.ChSystem.Add(seabed)
 
-    # add material to objects
-    #seabed.SetMaterialSurface(material)
-    #m1.setContactMaterial(material)
-    #m2.setContactMaterial(material)
-
+        # add material to objects
+        #seabed.SetMaterialSurface(material) # not valid for new Chrono
+        m1.setContactMaterial(material)
+        m2.setContactMaterial(material)
 
 #  ____                        _                   ____                _ _ _   _
 # | __ )  ___  _   _ _ __   __| | __ _ _ __ _   _ / ___|___  _ __   __| (_) |_(_) ___  _ __  ___
