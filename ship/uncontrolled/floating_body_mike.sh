@@ -1,7 +1,7 @@
 #!/bin/bash
-#SBATCH -N 4
-#SBATCH -n 256
-#SBATCH -t 24:00:00
+#SBATCH -N 1
+#SBATCH -n 64
+#SBATCH -t 72:00:00
 #SBATCH -p workq
 #SBATCH -A hpc_proteus02o
 #SBATCH -o o.out
