@@ -48,12 +48,12 @@ opts= Context.Options([
     ("dt_output",0.1,"Time interval to output solution"),
     ("cfl",0.5,"Desired CFL restriction"),
     ("he",0.05,"he relative to Length of domain in x"),
-    ("wave_height",0.5,"Wave height"),
+    ("wave_height",0.2,"Wave height"),
     ("fr",1.0,"Forcing frequency ratio"),
     ("fnx",0.3662,"Natural frequency of sway motion of the main structure"),
     ("fny",0.3662,"Natural frequency of heave motion of the main structure"),
     ("fnz",0.3662,"Natural frequency of roll motion of the main structure"),
-    ("mooring",True,"True if the mooring lines are attached"),
+    ("mooring",False,"True if the mooring lines are attached"),
     ("fill_water",True,"True if the attached tank is filled with water TLD is activated"),
     ("ic_angle",0.,"Initial pitch angle of the floating platform (deg)"),
     ])
@@ -137,8 +137,7 @@ domain = Domain.PlanarStraightLineGraphDomain()
 # ----- SHAPES ----- #
 
 # Space between TLD and main structure
-spacing = 1.
-
+spacing = 0.2
 
 # Main structure dimensions
 body_w1 = 8.

@@ -1,14 +1,12 @@
 #!/bin/bash
-##SBATCH -N 4
-##SBATCH -n 256
 #SBATCH -N 1
-#SBATCH -n 16
+#SBATCH -n 64
 #SBATCH -t 72:00:00
 #SBATCH -p workq
 #SBATCH -A hpc_proteus02o
 #SBATCH -o o.out
 #SBATCH -e e.err
-#SBATCH -J emi2023_ship_oldtld_fr100
+#SBATCH -J emi2023_moored_ship_fr100
 #load proteus module and ensure proteus's python is in path
 
 date
@@ -23,10 +21,11 @@ export MV2_HOMOGENEOUS_CLUSTER=1
 
 mkdir -p $WORK/$SLURM_JOB_NAME.$SLURM_JOBID 
 cd $WORK/$SLURM_JOB_NAME.$SLURM_JOBID 
-cp $SLURM_SUBMIT_DIR/petsc.options.superlu_dist .
+#cp $SLURM_SUBMIT_DIR/petsc.options.superlu_dist .
+#cp $SLURM_SUBMIT_DIR/petsc.options.asm .
 cp $SLURM_SUBMIT_DIR/*.py .
 cp $SLURM_SUBMIT_DIR/*.sh .
 
-parun --TwoPhaseFlow two_floating_bodies.py -F -l 5 -C "he=0.1 fr=1."
+parun --TwoPhaseFlow pmtld.py -F -l 5 -C "he=0.1 fr=1.0"
 
 exit 0

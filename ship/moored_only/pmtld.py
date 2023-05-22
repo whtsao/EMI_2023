@@ -22,7 +22,7 @@ opts= Context.Options([
     ("fnx",0.3662,"Natural frequency of sway motion"),
     ("fny",0.3662,"Natural frequency of heave motion"),
     ("fnz",0.3662,"Natural frequency of roll motion"),
-    ("mooring",False,"True if the mooring lines are attached"),
+    ("mooring",True,"True if the mooring lines are attached"),
     ("collision",False,"True if the mooring lines is collision body"),
     ("ic_angle",0.,"Initial pitch angle of the floating platform (deg)"),
     ])
