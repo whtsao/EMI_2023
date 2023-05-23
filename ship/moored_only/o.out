@@ -31,3 +31,38 @@ Iteration  4: Mean of corrections to free surface:  5.1e-14
 # Length/Depth:   1.17
 # Dimensionless Period T*sqrt(g/d):   2.70
 # Current criterion: Euler,  Dimensionless value: 0.000
+
+Touch key to continue
+
+
+Finished
+Max nNodes_subdomain 42208 nNodes_global 42208
+Done allocating MPIAdj
+Max memory usage per core 0.23219GB
+Done applying partition
+Max memory usage per core 0.232657GB
+==================out of core old2new is correct!====================
+Done with masks
+Max memory usage per core 0.234004GB
+Done marking elements
+Max memory usage per core 0.316994GB
+Done allocating element numbering new2old/old2new
+Max memory usage per core 0.320508GB
+Done reading element boundaries
+Max memory usage per core 0.36214GB
+Allocating elementBoudnary old2new/new2old
+Max memory usage per core 0.37836GB
+Done allocating elementBoudnary old2new/new2old
+Max memory usage per core 0.37836GB
+Done reading edges
+Max memory usage per core 0.420803GB
+Setting edgeNumering old2new/new2old
+Max memory usage per core 0.437023GB
+Done allocating edgeNumering old2new/new2old
+Max memory usage per core 0.437023GB
+Done reading vertices
+Max memory usage per core 0.440537GB
+Done with material types
+Max memory usage per core 0.513782GB
+Done with partitioning!
+Max memory usage per core 0.51406GB
