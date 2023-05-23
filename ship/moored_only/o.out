@@ -1,4 +1,4 @@
-Thu May 18 08:25:52 CDT 2023
+Tue May 23 10:15:41 CDT 2023
 Autoloading gcc/11.2.0
 
 Loading proteus/fct/gcc-11.2.0
@@ -7,7 +7,7 @@ Loading proteus/fct/gcc-11.2.0
 
 # Printing input data here to check
 
-# Height/Depth: 0.050
+# Height/Depth: 0.020
 # Dimensionless Period T*sqrt(g/d):   2.70
 # Current criterion: Euler,  Dimensionless value: 0.000
 
@@ -16,10 +16,10 @@ Loading proteus/fct/gcc-11.2.0
 
 Height step  1 of  1
 
-Iteration  1: Mean of corrections to free surface:  7.4e-03
-Iteration  2: Mean of corrections to free surface:  1.4e-04
-Iteration  3: Mean of corrections to free surface:  1.1e-07
-Iteration  4: Mean of corrections to free surface:  5.6e-11
+Iteration  1: Mean of corrections to free surface:  1.1e-03
+Iteration  2: Mean of corrections to free surface:  3.4e-06
+Iteration  3: Mean of corrections to free surface:  1.0e-09
+Iteration  4: Mean of corrections to free surface:  5.1e-14
 
 # Solution summary:
 
@@ -27,42 +27,7 @@ Iteration  4: Mean of corrections to free surface:  5.6e-11
 
 # Solution by 8-term Fourier series
 
-# Height/Depth: 0.050,  30% of the maximum of H/d = 0.168 for this length:
-# Length/Depth:   1.18
+# Height/Depth: 0.020,  12% of the maximum of H/d = 0.165 for this length:
+# Length/Depth:   1.17
 # Dimensionless Period T*sqrt(g/d):   2.70
 # Current criterion: Euler,  Dimensionless value: 0.000
-
-Touch key to continue
-
-
-Finished
-Max nNodes_subdomain 169093 nNodes_global 169093
-Done allocating MPIAdj
-Max memory usage per core 0.300708GB
-Done applying partition
-Max memory usage per core 0.301654GB
-==================out of core old2new is correct!====================
-Done with masks
-Max memory usage per core 0.304091GB
-Done marking elements
-Max memory usage per core 0.6378GB
-Done allocating element numbering new2old/old2new
-Max memory usage per core 0.652784GB
-Done reading element boundaries
-Max memory usage per core 0.819642GB
-Allocating elementBoudnary old2new/new2old
-Max memory usage per core 0.884855GB
-Done allocating elementBoudnary old2new/new2old
-Max memory usage per core 0.885125GB
-Done reading edges
-Max memory usage per core 1.0561GB
-Setting edgeNumering old2new/new2old
-Max memory usage per core 1.1213GB
-Done allocating edgeNumering old2new/new2old
-Max memory usage per core 1.1213GB
-Done reading vertices
-Max memory usage per core 1.13501GB
-Done with material types
-Max memory usage per core 1.41384GB
-Done with partitioning!
-Max memory usage per core 1.414GB

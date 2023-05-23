@@ -6,7 +6,7 @@
 #SBATCH -A hpc_proteus02o
 #SBATCH -o o.out
 #SBATCH -e e.err
-#SBATCH -J emi2023_uncontrolled_ship_fr100
+#SBATCH -J emi2023_ship_fixedTLD_fr100
 #load proteus module and ensure proteus's python is in path
 
 date

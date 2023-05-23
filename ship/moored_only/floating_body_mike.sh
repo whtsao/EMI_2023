@@ -26,6 +26,6 @@ cd $WORK/$SLURM_JOB_NAME.$SLURM_JOBID
 cp $SLURM_SUBMIT_DIR/*.py .
 cp $SLURM_SUBMIT_DIR/*.sh .
 
-parun --TwoPhaseFlow pmtld.py -F -l 5 -C "he=0.1 fr=1.0"
+parun --TwoPhaseFlow pmtld.py -F -l 5 -C "he=0.2 fr=1.0"
 
 exit 0
