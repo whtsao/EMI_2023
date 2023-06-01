@@ -1,4 +1,4 @@
-Tue May 23 10:56:44 CDT 2023
+Tue May 23 11:41:07 CDT 2023
 Autoloading gcc/11.2.0
 
 Loading proteus/fct/gcc-11.2.0
@@ -36,33 +36,33 @@ Touch key to continue
 
 
 Finished
-Max nNodes_subdomain 42303 nNodes_global 42303
+Max nNodes_subdomain 42365 nNodes_global 42365
 Done allocating MPIAdj
-Max memory usage per core 0.223363GB
+Max memory usage per core 0.228397GB
 Done applying partition
-Max memory usage per core 0.223777GB
+Max memory usage per core 0.22902GB
 ==================out of core old2new is correct!====================
 Done with masks
-Max memory usage per core 0.224326GB
+Max memory usage per core 0.230404GB
 Done marking elements
-Max memory usage per core 0.29839GB
+Max memory usage per core 0.313389GB
 Done allocating element numbering new2old/old2new
-Max memory usage per core 0.301904GB
+Max memory usage per core 0.317174GB
 Done reading element boundaries
-Max memory usage per core 0.343536GB
+Max memory usage per core 0.358806GB
 Allocating elementBoudnary old2new/new2old
-Max memory usage per core 0.359756GB
+Max memory usage per core 0.375026GB
 Done allocating elementBoudnary old2new/new2old
-Max memory usage per core 0.359756GB
+Max memory usage per core 0.375026GB
 Done reading edges
-Max memory usage per core 0.402469GB
+Max memory usage per core 0.417739GB
 Setting edgeNumering old2new/new2old
-Max memory usage per core 0.418689GB
+Max memory usage per core 0.433959GB
 Done allocating edgeNumering old2new/new2old
-Max memory usage per core 0.418689GB
+Max memory usage per core 0.433959GB
 Done reading vertices
-Max memory usage per core 0.422195GB
+Max memory usage per core 0.437465GB
 Done with material types
-Max memory usage per core 0.495706GB
+Max memory usage per core 0.510984GB
 Done with partitioning!
-Max memory usage per core 0.495874GB
+Max memory usage per core 0.511328GB
